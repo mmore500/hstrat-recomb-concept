@@ -1,3 +1,4 @@
+import copy
 import random
 
 from ..hstrat import recombine_strategy_stratum_genedrive
@@ -6,6 +7,8 @@ from ..hstrat import recombine_strategy_stratum_genedrive
 def hstrat_mate_decorator(func):
     def wrapFunc(*args, **kwargs):
         i1, i2 = func(*args, **kwargs)
+        i1 = copy.deepcopy(i1)
+        i2 = copy.deepcopy(i2)
         child_annotation = recombine_strategy_stratum_genedrive(
             i1.species_annotation,
             i2.species_annotation,
