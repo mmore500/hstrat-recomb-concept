@@ -27,9 +27,9 @@ def hstrat_mate_decorator(func):
             r2 = s1.GetDepositionRank()
             assert r1 == r2
 
-            if g1.GetNumStrataDeposited() - r1 == 5:
+            if g1.GetNumStrataDeposited() - r1 == 16:
                 s1._annotation |= 1 << random.randrange(64)
-            if g2.GetNumStrataDeposited() - r2 == 5:
+            if g2.GetNumStrataDeposited() - r2 == 16:
                 s2._annotation |= 1 << random.randrange(64)
 
             if s1.GetDifferentia() == s2.GetDifferentia():
