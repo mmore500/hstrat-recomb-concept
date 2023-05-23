@@ -19,9 +19,15 @@ def _setup_origin_times(
     return callibrate_branch_lengths_to_tip_origin_times(tree, depths)
 
 
-def dag_to_tree_upgma(dag: nx.DiGraph) -> BioPhylo.BaseTree.Tree:
+def dag_to_tree_upgma(
+    dag: nx.DiGraph,
+    correct_origin_times: bool = True,
+) -> BioPhylo.BaseTree.Tree:
     biopython_adjacency_matrix = dag_to_adjacency_matrix(dag)
 
     tree = BioPhylo_DistanceTreeConstructor().upgma(biopython_adjacency_matrix)
 
-    return _setup_origin_times(dag, tree)
+    if correct_origin_times:
+        tree = _setup_origin_times(dag, tree)
+
+    return tree
