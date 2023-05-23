@@ -1,0 +1,3 @@
+MILL_NPOP_SEQ: '[100] * 67 + [10] * 66 + [100] * 67'
+MILL_REPLICATE: 1
+MILL_TREATMENT_NAME: bottleneck
