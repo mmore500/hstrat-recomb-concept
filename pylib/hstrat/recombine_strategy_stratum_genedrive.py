@@ -10,6 +10,7 @@ def recombine_strategy_stratum_genedrive(
     c2: hstrat.HereditaryStratigraphicColumn,
 ) -> hstrat.HereditaryStratigraphicColumn:
     younger, older = sorted([c1, c2], key=lambda c: c.GetNumStrataDeposited())
+    assert younger.GetNumStrataDeposited() == older.GetNumStrataDeposited()
 
     store = hstrat.HereditaryStratumOrderedStoreList()
     for rank, differentia in older.IterRankDifferentiaZip():
