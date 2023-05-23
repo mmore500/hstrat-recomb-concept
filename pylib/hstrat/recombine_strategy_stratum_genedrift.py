@@ -5,26 +5,33 @@ import random
 from hstrat import hstrat
 
 
-def recombine_strategy_stratum_genedrive(
+def recombine_strategy_stratum_genedrift(
     c1: hstrat.HereditaryStratigraphicColumn,
     c2: hstrat.HereditaryStratigraphicColumn,
 ) -> hstrat.HereditaryStratigraphicColumn:
+    common_ranks = {*c1.IterRetainedRanks()} & {*c2.IterRetainedRanks()}
     younger, older = sorted([c1, c2], key=lambda c: c.GetNumStrataDeposited())
 
     store = hstrat.HereditaryStratumOrderedStoreList()
     for rank, differentia in older.IterRankDifferentiaZip():
-        younger_stratum = younger.GetStratumAtRank(rank)
-        younger_differentia = younger_stratum.GetDifferentia()
-        younger_annotation = younger_stratum.GetAnnotation()
-
-        older_stratum = older.GetStratumAtRank(rank)
-        older_differentia = older_stratum.GetDifferentia()
-        older_annotation = older_stratum.GetAnnotation()
-
-        max_differentia = max(differentia, younger_differentia)
+        younger_annotation = younger.GetStratumAtRank(rank).GetAnnotation()
+        older_annotation = older.GetStratumAtRank(rank).GetAnnotation()
+        younger_differentia = younger.GetStratumAtRank(rank).GetDifferentia()
         stratum = hstrat.HereditaryStratum(
-            differentia=max_differentia,
+            differentia=random.choice(
+                [differentia] * (older_annotation + 1)
+                + [younger_differentia] * (younger_annotation + 1)
+            )
+            if (older.GetNumStrataDeposited() - rank) < 16
+            else random.choice([differentia, younger_differentia]),
             deposition_rank=rank,
+            annotation=max(
+                older_annotation,
+                younger_annotation,
+            )
+            + 1
+            if differentia == younger_differentia
+            else 0,
         )
         store.DepositStratum(stratum=stratum, rank=rank)
 

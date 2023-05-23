@@ -5,7 +5,7 @@ from Bio.Phylo.TreeConstruction import (
 import networkx as nx
 import numpy as np
 
-from .callibrate_branch_lengths_to_tip_origin_times import (
+from ..tree.callibrate_branch_lengths_to_tip_origin_times import (
     callibrate_branch_lengths_to_tip_origin_times,
 )
 from .calc_dag_depths import calc_dag_depths

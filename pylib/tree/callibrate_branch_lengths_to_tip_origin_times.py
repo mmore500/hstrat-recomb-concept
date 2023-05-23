@@ -1,4 +1,7 @@
+import typing
+
 from Bio import Phylo as BioPhylo
+import numpy as np
 
 
 def callibrate_branch_lengths_to_tip_origin_times(
@@ -18,6 +21,8 @@ def callibrate_branch_lengths_to_tip_origin_times(
             clade.origin_time = np.mean(
                 [c.origin_time - c.branch_length for c in clade.clades]
             )
+            for c in clade.clades:
+                c.branch_length = c.origin_time - clade.origin_time
 
     tree.root.branch_length = tree.root.origin_time
 

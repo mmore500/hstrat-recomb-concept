@@ -4,7 +4,7 @@ def hstrat_select_decorator(func):
         individuals = [*map(copy.copy, individuals)]
         for individual in individuals:
             individual.hstrat_annotation = (
-                individual.hstrat_annotation.CloneDescendant()
+                individual.hstrat_annotation.CloneDescendant(0)
             )
         return individuals
 
