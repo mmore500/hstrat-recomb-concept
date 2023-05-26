@@ -24,9 +24,32 @@ More sophisticated pedigree-to-phylogeny conversion that collapses closely-relat
 
 \subsection{Effective Population Size Inference}
 
-\input{fig/ne-detection-matrix}
-\input{fig/ne-estimate-distributions}
 \input{fig/ne-example-replicates}
+
+Figure \ref{fig:ne-example-replicates} compares 10-sample running estimates of population size among one replicate from each surveyed treatment (Section \ref{sec:population-size-inference-experiments}).
+Estimate trajectories from other replicates will be made available in supplemental material
+
+All effective population estimates generally appear to respond to underlying demographic changes as expected, although the response to selection pressure relaxation appears somewhat weaker than responses to changes in population size, and orders-of-magnitude-spanning noise appears across all treatments.
+
+\input{fig/ne-estimate-distributions}
+
+Figure \ref{fig:ne-estimate-distributions} summarizes the distribution of effective population size estimates across replicates at three time points spread across the beginning, middle, and end of evolutionary runs.
+Estimates differ significantly across time points within all non-control treatments, confirming population size estimator sensitivity to underlying changes in population size and selection pressure ($p < 0.05$, non-overlapping confidence intervals).
+For the bottleneck and selection pressure treatments, which involve reversion to initial conditions, distributions of the first and last time points are comparable, as expected.
+
+\input{fig/ne-detection-matrix}
+
+Figure \ref{fig:ne-detection-matrix} summarizes the detectability of underling $N_e$ changes.
+
+Detection was performed using MLE confidnece interval comparison between rolling population size estimates at different time points and Mann-Whitney comparison of one-off population size estimate sets at different time points.
+
+No false positives differences in effective population size are detected within the control treatment or same-timepoint comparisons within any treatment.
+However, under the range expansion treatment, changes to population size from 10 to 66 is more readily detectable than changes earlier changes.
+
+% fro mpopulation size 66 to 128.
+%  \% over the course of an evolutionary run .
+
+
 
 \subsection{Gene Selection Inference}
 
