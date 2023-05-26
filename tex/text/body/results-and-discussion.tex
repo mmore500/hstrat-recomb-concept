@@ -1,10 +1,34 @@
 \section{Results and Discussion} \label{sec:results}
 
+\subsection{Genealogical Inference}
+
+\input{fig/species-example-replicates}
+
+Figure \ref{fig:species-example-replicates} compares phylogenetic trees reconstructed from to corresponding references extracted from perfectly-tracked sexual pedigrees.
+For treatments with meaningful phylogentic structure --- the ``allopatry'' and ``ring'' treatments --- phylogenetic reconstruction from species-level annotation largely succeeded in recovering membership in structured subpopulations and the historical relationships between subpopulations.
+In fact, for the ``allopatry'' treatment, inner node time points appear to more closely track the true generational time frames of speciation events (at generation 100 and 150) than the UPGMA-based pedigree distillation.
+Adherence to the reference structure is somewhat weaker in the ring treatment than the allopatry treatment, perhaps due to ill-definedness of nontransitive phylogenetic distances expected due to genetic relatedness closing around the ring in both directions.
+Reconstruction/reference comparisons for other replicates will be provided in supplemental material.
+
+\input{fig/species-reconstruction-error}
+
+Figure \ref{fig:species-reconstruction-error} shows distributions of reconstruction error for each treatment.
+
+Across all three treatments, all ten replicate reconstructions exhibited quartet distance from reference was strictly less than 0.66, the expected quartet distance between random trees \citep{smith2020information}.
+This provides strong evidence that some successful phylogenetic inference occurred in all three cases (exact binomial test, $p < 0.01$).
+
+However, as expected, reconstruction quality on the bag population structure was marginal due to the lack of meaningful phylogenetic information to reconstruct.
+Performance on the ring and allopatry treatments was stronger, achieving quartet distances between reconstruction and reference of around 0.3 in the typical case.
+Inclusion of nebulous phylogenetic structure within the reference phylogeny (i.e., within well-mixed subpopulations in both ) seems likely to significantly contribute to reconstruction error, obscuring the true magnitude of meaningful reconstruction error due to limitations of the instrumentation-based approach.
+More sophisticated pedigree-to-phylogeny conversion that collapses closely-related subpopulations to single nodes may prove more descriptive.
+
+\subsection{Effective Population Size Inference}
+
 \input{fig/ne-detection-matrix}
 \input{fig/ne-estimate-distributions}
 \input{fig/ne-example-replicates}
-\input{fig/ne-process-example}
+
+\subsection{Gene Selection Inference}
+
 \input{fig/selection-example-replicates}
 \input{fig/selection-sensitivity-specificity}
-\input{fig/species-example-replicates}
-\input{fig/species-reconstruction-error}
