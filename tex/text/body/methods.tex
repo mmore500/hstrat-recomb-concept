@@ -14,7 +14,7 @@ Section \ref{sec:genealogical-inference} describes the three treatments compared
 Section \ref{sec:phylogeny-extraction} lays details the procedure used to convert recorded sexual pedigrees to phylogenetic trees that reconstruction quality could be evaluated against.
 
 Section \ref{sec:population-size-inference-principle} recaps the mechanistic principle behind distributed population size estimation and Section \ref{sec:population-size-inference-stats} reports statistical formulations derived to perform distributed population size estimation.
-Section \ref{sec:example-ne-inference} explains population size inference over an example evolutionary replicate.
+Section \ref{sec:ne-process-example} explains population size inference over an example evolutionary replicate.
 
 Section \ref{sec:population-size-inference-experiments} describes the three treatments compared to test the proposed population size inference mechanism.
 
@@ -64,7 +64,7 @@ Although gene drive mechanisms are widespread in natural systems \citep{alphey20
 
 Species instrumentation employed the recombination and gene drive mechanism described in Section \ref{sec:gene-drive}.
 Species hereditary stratigraph instrumentation was employed for the genealogical inference and population size inference experiments.
-Gene instrumentation employed the distributed copy count estimation mechanism described in Section \ref{sec:copy-count}.
+Gene instrumentation employed the distributed copy count estimation mechanism described in Section \ref{sec:dist-gene-prevalence-est}.
 Gene hereditary stratigraph instrumentation was employed for the positive selection inference experiment.
 
 \subsection{Hereditary Stratigraphic Column Recombination \& Gene-drive Mechanism}
@@ -160,10 +160,10 @@ This treatment simulates 100 generations of well-mixed sympatric evolution.
 At generation 100, the population is divided into two 50-member subpopulations.
 These subpopulations evolve independently with no migration for 50 generations.
 Then, at generation 150, the first subpopulation is split again into .
-The remaining 50-member subbpopulation and the five new 10-member subpopulations then evolve independently with no migration for a further 50 generations.
+The remaining 50-member subpopulation and the five new 10-member subpopulations then evolve independently with no migration for a further 50 generations.
 Phylogenetic reconstruction from this treatment should ideally recover a binary branching at generation 100 followed by a secondary quintuple-branching along one lineage at generation 150.
 
-\subsubsectoin{Ring Treatment}
+\subsubsection{Ring Treatment}
 
 This treatment splits the population into ten distinct subpopulations (islands), each of which evolved independently.
 The subpopulations were arranged in a ring topology, and one individual migrated between adjacent populations per generation happens once per generation.
@@ -202,7 +202,7 @@ Hence, by observing the values of these fixed genes, it's possible to infer $n$,
 This approach is further extendable to cases involving multiple independent genes, each adhering to the same fixed precision and initial uniform distribution, providing a compelling estimation technique for population size.
 
 Directly analogous techniques to estimate population size have also arisen in the context of decentralized, anonymous network engineering \citep{varagnolo2010distributed,hakan2012distributed}.
-In these schemes, nodes independently draw a random vector of numerical values from a known distribution,
+In these schemes, nodes independently draw a random vector of numerical values from a known distribution.
 Values are exchanged through an aggregating function like (e.g., minimum, maximum, etc.), ultimately resulting in a consensus value fixing within the network.
 Each node can then independently infer probabilistic information about the larger network, in a manner that is generally consistent across nodes.
 
