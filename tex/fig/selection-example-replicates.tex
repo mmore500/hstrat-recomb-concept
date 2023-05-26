@@ -1,10 +1,10 @@
 \begin{sidewaysfigure}
   \centering
-  \begin{minipage}{.8\textwidth} % adjust the width as needed
+  \begin{minipage}{.7\textwidth} % adjust the width as needed
 
     \begin{minipage}{\textwidth}
       \centering
-      \includegraphics[width=0.9\textwidth]{notebooks/notebooks/teeplots/col=fitness-advantage+viz=facet-lineplot-twiny+x=generation+y1=prevalence+y2=annotation+ext=}
+      \includegraphics[width=\textwidth]{notebooks/notebooks/teeplots/col=fitness-advantage+viz=facet-lineplot-twiny+x=generation+y1=prevalence+y2=annotation+ext=}
       \subcaption{Cross-replicate aggregate, shaded bands are 95\% percentile intervals}
       \label{fig:selection-example-replicates:aggregate}
     \end{minipage}
@@ -34,8 +34,17 @@
 
   \end{minipage}
   \hfill % Creates horizontal space. Can also use \hspace{<len>}
-  \begin{minipage}{.15\textwidth} % adjust the width as needed
-    \caption{TODO}
+  \begin{minipage}{.25\textwidth} % adjust the width as needed
+    \caption{
+    Gene prevalence trajectories (blue on top/red on bottom) and 16-generation rolling sums of gene prevalence annotation bit counts (red on top/blue on bottom) across generations by selection strength treatment.
+    Top row summarizes distribution across replicates.
+    Bottom row shows an example replicate of each treatment.
+    Fitness advantage 0.0 inferred no selective benefit, so all selection detections on this treatment are false positives.
+    Fitness advantage 0.1 experienced relatively weak selection and fitness advantage 1.0 experienced strong selection.
+    Spikes of high gene prevalence annotation bit count (blue) are indicative of selective dynamics.
+    Selection is detected for a replicate if any 16-generation rolling sum of gene prevalence annotation bit count (Section \ref{sec:dist-gene-prevalence-est}) exceeds the threshold.
+    Note that $y$ axis scaling differs among bottom-row graphs.
+    }
     \label{fig:selection-example-replicates}
   \end{minipage}
 
