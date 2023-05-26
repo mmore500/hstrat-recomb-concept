@@ -1,45 +1,104 @@
 \section{Introduction} \label{sec:introduction}
 
-- why phylogenetic analysis is important to genetic programming
-  - diagnose evolutionary dynamics for algorithm tuning/design
-    - need examples
-  - phylogeny-aware algorithms
-    - example like NEAT?
-    - example: phylogeny-informed lexicase downsampling/estimation
+Phylogenetic analysis has emerged as a critical component in the field of genetic programming, facilitating the nuanced understanding and manipulation of the evolutionary dynamics.
+By providing critical insights into how genetic algorithms evolve over time, phylogenetic analysis is a powerful tool for algorithm tuning and design.
+It enables us to identify effective patterns, allowing us to refine our strategies for developing more efficient and robust algorithms.
+For instance, an understanding of the phylogenetic dynamics can help us design more effective phylogeny-aware algorithms, such as NeuroEvolution of Augmenting Topologies (NEAT) \citep{stanley2002evolving} or lexicase downsampling through phylogeny-informed trait estimation (Lalejini, GPTP 2023). %CITE
+% These examples underscore the indispensability of phylogenetic analysis in genetic programming. % APPLICATIONS.
 
-- why parallel and distributed methods are important for genetic programming and digital evolution
-  - population size comparison
-  - expensive evaluations
-  - needs to be robust, maybe decentralized (cerebras)
+Burgeoning parallel and distributed computing power holds significant promise to enable profound advancements in genetic programming and digital evolution through increases to feasible population sizes, computation of more sophisticated genetic representations and developmental processes, and facilitation of more robust fitness evaluations.
+However, at very large scales, some traditional, centralized approaches to algorithmic administration of evolution become increasingly inefficient and brittle.
 
-- recap existing hereditary stratigraphy work
-  - space trade-offs
-  - inference error vs phylogenetic metrics
-  - axexual lineages
+Phylogenetic tracking in digital evolution systems has traditionally been accomplished in a centralized manner through stitching together of parent-offspring relationships across all reproduction events within a system.
+Pruning phylogenetic records associated with extinct taxa is crucial to maintaining memory- and disk-tractability of phylogenetic record-keeping, but introduces runtime communication overhead between processing elements.
+At very large scales, data loss and hardware failure become nearly inevitable regular occurrences \citep{gropp2013programming}.
+Perfect phylogenetic tracking approaches are vulnerable to corruption from small amounts of information loss (i.e., disconnecting or misconnecting tree components).
 
-- asexual lineages vs sexual pedigrees
-  - why crossover/sexual recombination is important in genetic programming
-  - many more organisms have extant descendants
-  - very rapid history growth in that makes perfect tracking difficult even in serial situations
+Reconstruction-based approaches to phylogenetic analysis provide a possible solution.
+These operate akin to the phylogenomic paradigm in biology, where high-fidelty phylogenetic information is inferred through synthesis of genetic information associated with extant organisms.
+Although fully decentralized and robust to data loss, phylogenetic inference from biological genomes is notoriously complex, compute- and  data-intensive.
+Fortunately, the malleability of the digital substrate provides opportunity to sidestep such challenges through explicit design of genetic components that facilitate straightforward, efficient phylogenetic inference from small amounts of data.
 
-- this paper covers how to extend hereditary stratigraphy methods to sexual lineages
-  - gene-wise annotation is obvious way: gene trees have some similarities to asexual lineages
-  - genome-wise annotation
+This possibility motivated development of the ``hereditary stratigraphy'' technique for genetic annotations to facilitate phylogenetic inference \citep{moreno2022hereditary}.
+Briefly, this method works by applying heritable markers to individual digital genomes.
+At each generation, a randomly generated ``fingerprint'' value is generated and appended to each genome's annotation.
+Because pre-existing markers are faithfully inherited, the extent of common ancestry between two instrumented genomes can be deduced by aligning ``fingerprint'' values and identifying the first value where values diverge.
+From this point onwards, the two genomes are definitively known to not share common ancestry.
+Practical applications require pruning of ``fingerprint'' data to rapid accumulation of excessive genome bloat.
+Such pruning represents a directly-controllable trade-off between annotation memory use and inferential resolution.
 
-- objectives
-  - species inference (i.e., track \& reconstruct history of subpopulations that don't interbreed)
-    - related: describe ``relatedness'' of organisms
-  - infer species Ne (effectie population size: headcount and gene pool cutoffs)
-    - e.g., range expansion bottleneck events
-  - detect positive selection on genes
+Existing work with hereditary stratigraphy has focused exclusively on inference over asexual lineages.
+As crossover and sexual recombination operations are integral to digital evolution --- and, particularly, genetic programming --- the existing methodology's restriction to asexual lineages is a major limitaiton.
+This work introduces techniques to apply hereditary stratigraphy methods to sexual lineages to facilitate robust, efficient inference of genealogical history, historical demography, and selection dynamics without centralized tracking.
+Such capabilities promise to enhance diagnostic telemetry, increase scientific observability, and enable application of phylogeny-aware evolutionary algorithms across diverse, large-scale digital evolution systems.
 
-We show how these objectives can be fulfilled
-
+% For sexual populations, pedigree records
+% The vision is to develop a robust and possibly decentralized system, akin to cerebras, to manage these computational tasks effectively. %TODO
 
 
-- recap results (maybe just in abstract; TODO add quantities)
-  - species inference: reliably recover coarse-grained speciation history, recover relatedness
-  - population size: reliably detect order-of magnitude population size changes and detect selection pressure in most cases
-  - positive selection: reliably detect strong positive selection (1.0 relative fitness advantage), detect weaker (0.10 relative fitness advantage) in the majority of cases
+% This approach applies heritable markers to individual digital genomes to facilitate post-hoc reconstruction of phylogenetic history.
+% Each time a marker is inherited, a fresh random packet of data --- a ``fingerprint'' --- is generated and appended to the inherited marker.
+% To infer phylogenetic history, fingerprints from the markers of extant organisms are aligned and compared.
+% Identical fingerprints within the record signifies (likely) shared ancestry between organisms.
+% Conversely, the presence of a discrepancy in fingerprints definitively evidences divergence in ancestry at the generation those fingerprints were generated.
 
-example \citep{gagliardi2019international}
+
+% The study of sexual pedigrees introduces a new dimension to the conversation. %TODO
+ %, largely because it increases the probability that organisms will have extant descendants.
+% The rapid history growth resulting from this dynamic makes perfect tracking challenging, even in serial situations, but it's a complexity we need to tackle.
+%
+% In this paper, we will elucidate how hereditary stratigraphy methods can be extended to sexual lineages.
+% The most apparent way to do this would be through gene-wise annotation, considering that gene trees share certain similarities with asexual lineages.
+% However, we also propose exploring genome-wise annotation as another effective method.
+%
+% Our objectives in this endeavor include species inference, which would involve tracking and reconstructing the history of subpopulations that don't interbreed.
+% This is closely related to describing the ``relatedness'' of organisms.
+% We aim to infer species $N_e$, that is, the effective population size, considering both the headcount and gene pool cutoffs. %TODO
+% This could provide valuable insights into events like range expansion bottlenecks.
+% Another objective is to detect positive selection on genes.
+%
+% In the following sections, we will demonstrate how these objectives can be achieved and how this approach contributes to the field of genetic programming and digital evolution.
+
+% - why phylogenetic analysis is important to genetic programming
+%   - diagnose evolutionary dynamics for algorithm tuning/design
+%     - need examples
+%   - phylogeny-aware algorithms
+%     - example like NEAT?
+%     - example: phylogeny-informed lexicase downsampling/estimation
+%
+% - why parallel and distributed methods are important for genetic programming and digital evolution
+%   - population size comparison
+%   - expensive evaluations
+%   - needs to be robust, maybe decentralized (cerebras)
+%
+% - recap existing hereditary stratigraphy work
+%   - space trade-offs
+%   - inference error vs phylogenetic metrics
+%   - axexual lineages
+%
+% - asexual lineages vs sexual pedigrees
+%   - why crossover/sexual recombination is important in genetic programming
+%   - many more organisms have extant descendants
+%   - very rapid history growth in that makes perfect tracking difficult even in serial situations
+%
+% - this paper covers how to extend hereditary stratigraphy methods to sexual lineages
+%   - gene-wise annotation is obvious way: gene trees have some similarities to asexual lineages
+%   - genome-wise annotation
+%
+% - objectives
+%   - species inference (i.e., track \& reconstruct history of subpopulations that don't interbreed)
+%     - related: describe ``relatedness'' of organisms
+%   - infer species Ne (effectie population size: headcount and gene pool cutoffs)
+%     - e.g., range expansion bottleneck events
+%   - detect positive selection on genes
+%
+% We show how these objectives can be fulfilled
+%
+%
+%
+% - recap results (maybe just in abstract; TODO add quantities)
+%   - species inference: reliably recover coarse-grained speciation history, recover relatedness
+%   - population size: reliably detect order-of magnitude population size changes and detect selection pressure in most cases
+%   - positive selection: reliably detect strong positive selection (1.0 relative fitness advantage), detect weaker (0.10 relative fitness advantage) in the majority of cases
+%
+% example \citep{gagliardi2019international}
