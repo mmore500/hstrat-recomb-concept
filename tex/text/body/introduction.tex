@@ -1,3 +1,45 @@
 \section{Introduction} \label{sec:introduction}
 
+- why phylogenetic analysis is important to genetic programming
+  - diagnose evolutionary dynamics for algorithm tuning/design
+    - need examples
+  - phylogeny-aware algorithms
+    - example like NEAT?
+    - example: phylogeny-informed lexicase downsampling/estimation
+
+- why parallel and distributed methods are important for genetic programming and digital evolution
+  - population size comparison
+  - expensive evaluations
+  - needs to be robust, maybe decentralized (cerebras)
+
+- recap existing hereditary stratigraphy work
+  - space trade-offs
+  - inference error vs phylogenetic metrics
+  - axexual lineages
+
+- asexual lineages vs sexual pedigrees
+  - why crossover/sexual recombination is important in genetic programming
+  - many more organisms have extant descendants
+  - very rapid history growth in that makes perfect tracking difficult even in serial situations
+
+- this paper covers how to extend hereditary stratigraphy methods to sexual lineages
+  - gene-wise annotation is obvious way: gene trees have some similarities to asexual lineages
+  - genome-wise annotation
+
+- objectives
+  - species inference (i.e., track \& reconstruct history of subpopulations that don't interbreed)
+    - related: describe ``relatedness'' of organisms
+  - infer species Ne (effectie population size: headcount and gene pool cutoffs)
+    - e.g., range expansion bottleneck events
+  - detect positive selection on genes
+
+We show how these objectives can be fulfilled
+
+
+
+- recap results (maybe just in abstract; TODO add quantities)
+  - species inference: reliably recover coarse-grained speciation history, recover relatedness
+  - population size: reliably detect order-of magnitude population size changes and detect selection pressure in most cases
+  - positive selection: reliably detect strong positive selection (1.0 relative fitness advantage), detect weaker (0.10 relative fitness advantage) in the majority of cases
+
 example \citep{gagliardi2019international}
