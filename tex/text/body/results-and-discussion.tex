@@ -49,9 +49,44 @@ However, under the range expansion treatment, changes to population size from 10
 % fro mpopulation size 66 to 128.
 %  \% over the course of an evolutionary run .
 
-
-
 \subsection{Gene Selection Inference}
 
 \input{fig/selection-example-replicates}
+
+Gene selection experiments introduced novel alleles with fitness advantages of 1.0 (strong selection), 0.1 (weaker selection), and 0.0 (no selection --- control).
+For each trial, the prevalence trajectory of the introduced allele and corresponding response in the distributed delayed copy count mechanism described in Section \ref{sec:positive-selection-inference-experiment} were recorded.
+Copy count estimates were extracted from the hereditary stratum sequence of the focal gene's instrumentation within a randomly-sampled extant organism at the end of evolutionary runs.
+The sum of copy count estimates within a sliding 16 generation window (the same duration as the copy count snapshot delay) is visualized, and was used below to detect selection events.
+
+Figure \ref{fig:selection-example-replicates} plots these two signals for example replicates of the three treatments as well as aggregated across the ten sampled replicates.
+For the strong selection treatment, allele frequency immediately shoots up towards fixation rapidly and induces a large, distinctive spike in the delayed copy count.
+For the weaker selection treatment, allele frequency grows somewhat less rapidly with much greater variance in the timing of sweep culmination after allele introduction.
+A delayed copy count spike is apparent, but of smaller magnitude and --- corresponding to variation in sweep culmination timing --- more variable in timing after allele introduction.
+Finally, no delayed copy count spike pattern is apparent across the neutral control replicates.
+However, within the visualized example control replicate run, a small magnitude spike corresponding to an apparent drift event around 150 generations can be seen.
+
+% Gene prevalence trajectories (blue on top/red on bottom) and 16-generation rolling sums of gene prevalence annotation bit counts (red on top/blue on bottom) across generations by selection strength treatment.
+% Top row summarizes distribution across replicates.
+% Bottom row shows an example replicate of each treatment.
+% Fitness advantage 0.0 inferred no selective benefit, so all selection detections on this treatment are false positives.
+% Fitness advantage 0.1 experienced relatively weak selection and fitness advantage 1.0 experienced strong selection.
+% Spikes of high gene prevalence annotation bit count (blue) are indicative of selective dynamics.
+% Selection is detected for a replicate if any 16-generation rolling sum of gene prevalence annotation bit count (Section \ref{sec:dist-gene-prevalence-est}) exceeds the threshold.
+% Note that $y$ axis scaling differs among bottom-row graphs.
+
+
+% Gene selection detection rates across detection thresholds for each fitness advantage level among 10 replicates.
+% Fitness advantage 0.0 inferred no selective benefit, so all selection detections on this treatment are false positives.
+% Fitness advantage 0.1 experienced relatively weak selection and fitness advantage 1.0 experienced strong selection.
+% Detection threshold 200 distinguishes treatment 0.0 and 0.1 with one false positive and one false negative.
+% Fitness advantage 1.0 has all replicates detected across all shown threshold values.
+% Selection is detected for a replicate if any 16-generation rolling sum of gene prevalence annotation bit count (Section \ref{sec:dist-gene-prevalence-est}) exceeds the threshold.
+
 \input{fig/selection-sensitivity-specificity}
+
+To evaluate the sensitivity and specificity of delayed gene copy count as a mechanism for detection of selection events, we evaluated the false-positive (i.e., detection selection on control replicates) and false-negative rate (i.e., non-detection of selection on fitness-advantaged replicates) across a range of detection threshold values.
+Figure \ref{fig:selection-sensitivity-specificity} plots possible trade-offs across a range of threshold values.
+Strong selection events can be unambiguously distinguished from neutral events, as well as from weaker selection events.
+Weaker selection and neutral events were not entirely separable.
+Setting the detection threshold at sum count 200 misidentified one neutral event and one weak positive event --- corresponding to a 10\% false-positive and 10\% false-negative rate.
+Better discrimination of weaker selection from neutral dynamics might be possible through longer snapshot delay, although this likely involves a trade-off with the distinctness of strong selection signal.
