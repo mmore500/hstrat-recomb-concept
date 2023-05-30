@@ -25,6 +25,9 @@ Finally, Section \ref{sec:software-data} acknowledges open source software used 
 \subsection{Hereditary Stratigraphy Instrumentation}
 \label{sec:instrumentation}
 
+\input{fig/deposit-prune-example.tex}
+\input{fig/retention-policy-matrix.tex}
+
 Proposed methods for genealogical and evolutionary inference over distributed sexual populations build on the recently-developed ``hereditary stratigraphy'' technique, originally developed to facilitate phylogenetic inference over asexual populations \citep{moreno2022hstrat}.
 This approach applies heritable markers to individual digital genomes to facilitate post-hoc reconstruction of phylogenetic history.
 Each time a marker is inherited, a fresh random packet of data --- a ``fingerprint'' --- is generated and appended to the inherited marker.
@@ -48,6 +51,8 @@ This work uses 64 bit fingerprints, which collide with probability $1/2^{64} \ap
 At population size 100 over 200 generations, as in the genealogical inference and control condition of the population size inference experiments, the probability of any collision is $< 2 \times 10^{-15}$.
 At population size 200 over 400 generations, as in the gene selection inference experiments, the probability of any collision is $< 5 \times 10^{-15}$.
 
+\input{fig/annotation-types.tex}
+
 As originally devised for asexual populations, hereditary stratigraphic markers followed a one-to-one relationship to genomes.
 Here, we explore two alternate schemes designed for instrumentation of sexual populations: gene instrumentation and species instrumentation.
 
@@ -69,6 +74,8 @@ Gene hereditary stratigraph instrumentation was employed for the positive select
 
 \subsection{Hereditary Stratigraphic Column Recombination \& Gene-drive Mechanism}
 \label{sec:gene-drive}
+
+\input{fig/gene-drive.tex}
 
 Successful species-level tracking necessitates consistent labeling of interbreeding population members and consensus among members on phylogenetic history.
 In the hereditary stratigraphic context, this translates to consistency in ``fingerpint'' differentia values for each instrumentation layer among population members.
@@ -346,6 +353,8 @@ The control treatment was run with a constant population size of 100 for 200 gen
 
 \subsection{Distributed Gene Prevalence Estimation}
 \label{sec:dist-gene-prevalence-est}
+
+\input{fig/copy-count-snapshot.tex}
 
 Increases in allele prevalence tend to occur for alleles experiencing positive selection, but can also occur for selectively neutral alleles due to drift effects.
 The key difference between the two is the \textit{rate} of increase within the population --- increases in prevalence due to drift tend to be slower than increases in prevalence due to selective effects, especially for large population sizes.
