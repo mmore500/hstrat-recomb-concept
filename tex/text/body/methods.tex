@@ -203,6 +203,8 @@ At the outset, each gene value is assumed to be drawn from a uniform distributio
 As generations evolve through sexual recombination, a "gene drive" mechanism is enforced where offspring inherit the larger gene value from their parents.
 Over time, this mechanism results in the largest gene value becoming dominant or `fixed' in the population.
 
+\input{fig/beta-explain.tex}
+
 An interesting property of this gene drive mechanism is the potential to estimate the original population size by observing the distribution of the fixed gene values.
 By introducing a random variable $\mathbb{X}$ to represent the magnitude of the fixed gene value, we can explore its distribution. Assuming our gene value is uniformly distributed between 0 and 1, it is identified as $\beta(n, 1)$ \citep{gentle2009computational} distributed.
 Hence, by observing the values of these fixed genes, it's possible to infer $n$, the original population size.
