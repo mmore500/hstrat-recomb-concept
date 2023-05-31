@@ -42,6 +42,7 @@ Discarding fingerprints decreases annotation size at the cost of sparsifying tim
 Trade-offs between annotation size and estimation accuracy can therefore be tuned through fingerprint retention strategy.
 For instance, resolution may be maintained over time points as a fixed proportion of generations elapsed since those time points at the cost of logarithmic growth in annotation size.
 Or, another possibility, annotation size can be maintained below a constant bound at the cost of linear growth in uncertainty as generations elapse.
+Figure \ref{fig:retention-policy-matrix} compares pruning strategies with different trade-offs.
 
 Fingerprint pruning was not performed in the reported experiments in order to simplify experimental setup and analysis.
 This means that a complete annotation record with fingerprints corresponding to every generation was maintained.
