@@ -12,13 +12,14 @@
 
     \vspace{1cm}
 
-    \begin{minipage}{0.5\textwidth}
+    \begin{minipage}{0.47\textwidth}
       \centering
       \includegraphics[height=0.2\textheight]{notebooks/notebooks/teeplots/fit=0.0+hue=clade+multiple=stack+ngen=16+npop=100+palette=set2+viz=histplot+x=generation+ext=}
       \subcaption{Muller plot depicting no selection for focal allele, ending with smaller copy count after 16 generations.}
       % \label{fig:ne-example-replicates:selection_pressure}
-    \end{minipage}%
-    \begin{minipage}{0.5\textwidth}
+    \end{minipage}
+    \,
+    \begin{minipage}{0.47\textwidth}
       \centering
       \includegraphics[height=0.2\textheight]{notebooks/notebooks/teeplots/fit=1.0+hue=clade+multiple=stack+ngen=16+npop=100+palette=set2+viz=histplot+x=generation+ext=}
       \subcaption{Muller plot depicting strong selection for focal allele, with fixation occuring before 16 generations.}
@@ -31,9 +32,9 @@
     \caption{
       Proposed mechanism for detecting gene-level selection via a distributed delayed copy count estimation mechanism.
       Strata deposited at generation $n$ progress through 16 generations, with copy count of one allele growing due to selection.
-      On the sixteenth generation, a ``snapshot'' is performed to set a random bit on field annotated onto each descendant differentia copy.
+      On the sixteenth generation, a ``snapshot'' is performed to set a random bit of the field annotated onto each descendant differentia copy (here, denoted by letter).
       In subsequent recombination events, set bits are exchanged between bit fields associated with common differentia.
-      Copy count at generation $n + 16$ from can then estimated from these bit fields, with high copy count being suggestive of selection.
+      Copy count at generation $n + 16$ from can then be estimated from these bit fields, with high copy count indicative of selection.
       Note that in this example collision between set bits $i'$ and $i"$ result in an undercount.
       This mechanism is associated with ``gene-level'' instrumentation (Figure \ref{fig:annotation-types}).
     }

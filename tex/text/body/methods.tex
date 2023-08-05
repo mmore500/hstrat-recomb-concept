@@ -6,9 +6,9 @@ Section \ref{sec:instrumentation} reviews hereditary stratigraphic annotation me
 The former strategy is used for positive selection inference and the later is used for genealogical and population size inference.
 
 Section \ref{sec:gene-drive} overviews the recombination and gene drive mechanisms employed for species-level instrumentation.
-Section \label{sec:collision-probability} evaluates the extent to which this methodology increases the expected rate of spurious differentia collision, which can lead to overestimation of relatedness from hereditary stratigraph instrumentation.
+Section \ref{sec:collision-probability} evaluates the extent to which this methodology increases the expected rate of spurious differentia collision, which can lead to overestimation of relatedness from hereditary stratigraph instrumentation.
 
-Section \ref{sec:one-max} describes the toy ``one-max'' problem used for the genealogical inference and population size inference experiments.
+Section \ref{sec:one-max} describes the simple ``one-max'' problem used for the genealogical inference and population size inference experiments.
 
 Section \ref{sec:genealogical-inference} describes the three treatments compared to test the proposed genealogical inference mechanisms.
 Section \ref{sec:phylogeny-extraction} lays details the procedure used to convert recorded sexual pedigrees to phylogenetic trees that reconstruction quality could be evaluated against.
@@ -20,19 +20,19 @@ Section \ref{sec:population-size-inference-experiments} describes the three trea
 
 Section \ref{sec:dist-gene-prevalence-est} summarizes the proposed mechanism for gene selection inference and Section \ref{sec:positive-selection-inference-experiment} reports the evolutionary system and experimental treatments used to test it.
 
-Finally, Section \ref{sec:software-data} acknowledges open source software used in this work and links to software and other artifacts from the work.
+Finally, Section \ref{sec:software-data} describes software and data associated with this work.
 
-\subsection{Hereditary Stratigraphy Instrumentation}
+\subsection{Genome Instrumentation}
 \label{sec:instrumentation}
 
 \input{fig/deposit-prune-example.tex}
 \input{fig/retention-policy-matrix.tex}
 
-Proposed methods for genealogical and evolutionary inference over distributed sexual populations build on the recently-developed ``hereditary stratigraphy'' technique, originally developed to facilitate phylogenetic inference over asexual populations \citep{moreno2022hstrat}.
+Proposed methods for genealogical and evolutionary inference over distributed sexual populations draw on ``hereditary stratigraphy'' technique, originally developed to facilitate phylogenetic inference over asexual populations \citep{moreno2022hstrat}.
 This approach applies heritable markers to individual digital genomes to facilitate post-hoc reconstruction of phylogenetic history.
 Each time a marker is inherited, a fresh random packet of data --- a ``fingerprint'' --- is generated and appended to the inherited marker.
 To infer phylogenetic history, fingerprints from the markers of extant organisms are aligned and compared.
-Identical fingerprints within the record signifies (likely) shared ancestry between organisms.
+Identical fingerprints within the record indicates (likely) shared ancestry between organisms.
 Conversely, the presence of a discrepancy in fingerprints definitively evidences divergence in ancestry at the generation those fingerprints were generated.
 Figure \ref{fig:deposit-prune-example} traces an example hereditary stratigraph through eight successive generations.
 
@@ -42,16 +42,16 @@ Discarding fingerprints decreases annotation size at the cost of sparsifying tim
 Trade-offs between annotation size and estimation accuracy can therefore be tuned through fingerprint retention strategy.
 For instance, resolution may be maintained over time points as a fixed proportion of generations elapsed since those time points at the cost of logarithmic growth in annotation size.
 Or, another possibility, annotation size can be maintained below a constant bound at the cost of linear growth in uncertainty as generations elapse.
-Figure \ref{fig:retention-policy-matrix} compares pruning strategies with different trade-offs.
+Figure \ref{fig:retention-policy-matrix} compares pruning strategies and their corresponding trade offs between size complexity and inference uncertainty.
 
-Fingerprint pruning was not performed in the reported experiments in order to simplify experimental setup and analysis.
-This means that a complete annotation record with fingerprints corresponding to every generation was maintained.
-Population-size and gene-selection inference mechanisms introduced here are in principle compatible with fingerprint pruning.
-Effective application of hereditary stratigraphy to sexual populations in practice, will require further work to determine the most effective distribution of fingerprint retention (e.g., uniform across generational time versus recency-proportional favoring more recent events) and the levels of reconstruction accuracy pertinent to characterization of evolutionary history and dynamics \citep{moreno2023toward}.
+Fingerprint pruning was not performed in the reported experiments in order to simplify experimental setup and analysis, experiments reported here do not incorporate fingerprint pruning.
+All inference mechanisms introduced here are, in principle, compatible with fingerprint pruning.
+However, further work remains to directly investigate how pruning affects presented approaches' characterization of evolutionary history and dynamics in sexual populations.
+Analogous work in asexual populations will provide some initial indications in this direction \citep{moreno2023toward}.
 
-This work uses 64 bit fingerprints, which collide with probability $1/2^{64} \approx 5 \times 10^{-20}$.
-At population size 100 over 200 generations, as in the genealogical inference and control condition of the population size inference experiments, the probability of any collision is $< 2 \times 10^{-15}$.
-At population size 200 over 400 generations, as in the gene selection inference experiments, the probability of any collision is $< 5 \times 10^{-15}$.
+This work uses 64 bit fingerprints, which collide spuriously with negligible probability $1/2^{64} \approx 5 \times 10^{-20}$.
+At population size 100 over 200 generations, as in the first sets of reported experiments, the probability of any collision is miniscule, $< 2 \times 10^{-15}$.
+At population size 200 over 400 generations, as in the last set of reported experiments, the probability of any collision is also miniscule, $< 5 \times 10^{-15}$.
 
 \input{fig/annotation-types.tex}
 
@@ -64,11 +64,11 @@ This strategy involves (potentially) several independent hereditary stratigraph 
 In, along the lines of ``gene tree'' analsyes in traditional phylogenetics \citep{avise1989gene}.
 
 In cases where digital chromosomes comprise a relatively small number of atomic genes, it may make sense to instrument every gene independently.
-However, in applications with very fine atomic genes (e.g., individual GP instructions) or no atomic genes (e.g., GA floating point values subjected to interpolation during crossover) it may make sense to instrument a representative subset of genes or introduce ``dummy'' genes associated with certain chromosomal positions.
+However, in applications with very fine atomic genes (e.g., individual GP instructions) or no atomic genes (e.g., GA floating point values subjected to interpolation during crossover) may warrant instrumentation of a representative subset of genes or introduction of ``dummy'' genes associated with certain chromosomal positions.
 
 Species-level instrumentation operates via hereditary stratigraphic columns associated with individual genomes.
-Instrumentation consensus within interbreeding populations is achieved through a gene drive mechanism that forces a single consensus differentia value to sweep each hereditary stratigraph layer (described in Section \ref{sec:gene-drive}).
-Although gene drive mechanisms are widespread in natural systems \citep{alphey2020standardizing, price2020resistance}, unlike gene-level annotation this technique has no direct analogy in typical phylogenetic analyses.
+Instrumentation consensus within interbreeding populations is achieved through a gene drive mechanism that forces a single consensus differentia value to sweep each hereditary stratigraph layer within interbreeding populations (i.e., species), described in Section \ref{sec:gene-drive}.
+Although gene drive mechanisms are widespread in natural systems \citep{alphey2020standardizing, price2020resistance}, unlike gene-level annotation this technique has no direct analogy in traditional phylogenetic analyses.
 
 Species instrumentation employed the recombination and gene drive mechanism described in Section \ref{sec:gene-drive}.
 Species hereditary stratigraph instrumentation was employed for the genealogical inference and population size inference experiments.
@@ -81,10 +81,10 @@ Gene hereditary stratigraph instrumentation was employed for the positive select
 \input{fig/gene-drive.tex}
 
 Successful species-level tracking necessitates consistent labeling of interbreeding population members and consensus among members on phylogenetic history.
-In the hereditary stratigraphic context, this translates to consistency in ``fingerpint'' differentia values for each instrumentation layer among population members.
+In the hereditary stratigraphic context, this translates to consistency among corresponding-time point fingerprint differentia values among population members.
 Recombination of differentia values between genome instrumentaiton markers will, in the limit, enforce such consensus.
 Under such a scheme, offspring would inherit differnetia values at each instrumentation layer independently, with values assigned to the offspring's instrumentation layers chosen arbitrarily from the corresponding layer of either of the parents.
-As $t \to \infty$, a single consensus fingerprint will eventually fix at each instrumentation layer within the population through drift.
+A single consensus fingerprint will eventually fix at each instrumentation layer within the population through drift.
 However, expected time to coalescence can be long for large populations.
 Further, distributions of coalescence times is fat-tailed, meaning that time for \textit{all} sites to reach consensus would be prohibitively large in most cases.
 
@@ -93,35 +93,38 @@ In well-mixed populations and structured populations with long-distance migratio
 Figure \ref{fig:gene-drive} depicts this mechanism.
 
 Asynchronous generations slightly complicate the picture.
-When individuals from different generations recombine, one parent will necessarily have instrumentation layers not present in the other.
+When individuals from different generations recombine, one parent will necessarily have fingerprint layers not present in the other.
 How should recombination proceed in this case?
 One possibility would be to simply ``fast-forward'' the younger instrument to match the generational depth of the elder.
-As with fingerprint pruning, species-level geneaology and population size inference mechanisms introduced here are in principle compatible with crossover between hereditary stratigraph instrumentation with mismatched generations.
-Synchronous generations were used for experiments reported in this work, however, so full exploration of this consideration remains for future work.
+However, like with fingerprint pruning above, full consideration of asynchronous generations remains for future work.
+All reported experiments use synchronous generations.
 
-The described recombination and gene drive mechanism only applied to species-level instrumentation and was used for the genealogical and population size inference experiments.
+The described gene drive-based recombination mechanism described in this section only applied exclusively to species-level instrumentation.
+(Gene-level instruments, although tagging along with genes shuffled up through genome-level recombination, did not themselves recombine).
 
 \subsection{Collision Probability Between Fixed Differentia Genes}
 \label{sec:collision-probability}
 
-Fixed genes' skew toward large-magnitude integers due to the dominance of larger values in gene drive competition increases the probability of fixed-gene collision between two populations causing misdetection of shared ancestry between the populations.
-Quantifying this collision probability effect is key to predicting the efficacy of this approach at scale.
+Fixed genes' skew toward large-magnitude integers due to the dominance of larger values in gene drive competition increases the probability of fixed-gene collision between two populations causing spurious detection of shared ancestry between the populations.
+This collision probability effect presents a potential threat to the efficacy of this approach at scale.
+We will assess the extent of this potential problem by computing threshold population sizes where collision becomes substantive.
 
 Suppose independent populations of size $a$ and $b$.
 The largest gene in each population will drive to fixation.
-If each population members' gene is drawn from uniform distribution on integers $[0, u)$, then the probability of collision between the populations' fixed genes is
+If each population members' gene is drawn from uniform distribution on integers $[0, u)$, then the probability of collision between the populations' fixed genes can be derived as
 
 \begin{align*}
 \frac{a \sum_{n=1}^{a + b - 1} \frac{u^{- n - 1} \left(\frac{u - 1}{u}\right)^{a + b - n - 1} \left(- \frac{{\binom{a - 1}{n}}}{{\binom{a + b - 1}{n}}} + 1\right) {\binom{a + b}{n + 1}}}{1 - \left(\frac{u - 1}{u}\right)^{a + b - 1}}}{a + b} \\
 + \frac{b \sum_{n=1}^{a + b - 1} \frac{u^{- n - 1} \left(\frac{u - 1}{u}\right)^{a + b - n - 1} \left(- \frac{{\binom{b - 1}{n}}}{{\binom{a + b - 1}{n}}} + 1\right) {\binom{a + b}{n + 1}}}{1 - \left(\frac{u - 1}{u}\right)^{a + b - 1}}}{a + b}.
 \end{align*}
 
-Derivation will be provided in supplementary materials.
+% Derivation will be provided in supplementary materials. TODO?
 
 For 32-bit differentia $u = 2^{32}$, collision occurs with $p < 0.5$ ($p = 0.46$) for two populations of size $a = b = 2^{32}$ .
 Collision occurs with $p < 0.01$ for two populations of size $a = b = 2^{26}$.
-So, for 32-bit differentia populations with magnitude below a factor of 64 of the maximum representable differentia value, collision probability between is low.
-Numerical considerations complicate evaluation of similar results for $u = 2^{64}$.
+So, 32-bit fingerprints can differentiate species pairs of around$ 6.7 \times 10^{7}$ members each with reasonable consistency.
+Reported experiments used 64-bit fingerprint values, which will exhibit even lower collision probabilities.
+However, numerical considerations complicate calculation.
 
 \subsection{One-Max Task}
 \label{sec:one-max}
@@ -271,21 +274,23 @@ For a single observation of fixed gene magnitude $\hat{x}$, the population size 
 \Big).
 \end{align*}
 
-The 95\% confidence interval spans a 145-fold order of magnitude and a 99\% confidence interval spans a 1057-fold order of magnitude.
+At this low observational power, the 95\% confidence interval spans a 145-fold order of magnitude and a 99\% confidence interval spans a 1057-fold order of magnitude.
 
 For $k$ observations of fixed gene magnitude $\hat{x}_i$, the population size $n$ can be estimated with $c\%$ confidence to fall within the interval $(\hat{n}_\mathrm{lb}, \hat{n}_\mathrm{ub})$ where $\hat{n}_\mathrm{lb}$ is the solution to
 
 \begin{align} \label{eqn:popsize_mle_ci_lb}
 0
-&= 2\Gamma(k, -\hat{n}_\mathrm{lb}\log(\prod_{i=1}^k\hat{x}_i)) - (c/100+1)\Gamma(k)
+&= 2\Gamma\Big(k, -\hat{n}_\mathrm{lb}\log(\prod_{i=1}^k\hat{x}_i)\Big) - (c/100+1)\Gamma(k)
 \end{align}
 
 and $\hat{n}_\mathrm{ub}$ is the solution to
 
 \begin{align} \label{eqn:popsize_mle_ci_ub}
   0
-  &= 2\Gamma(k, -\hat{n}_\mathrm{ub}\log(\prod_{i=1}^k\hat{x}_i))) - \Gamma(k)(1-c/100).
+  &= 2\Gamma\Big(k, -\hat{n}_\mathrm{ub}\log(\prod_{i=1}^k\hat{x}_i)\Big) - (1-c/100)\Gamma(k).
 \end{align}
+
+Here, $\Gamma$ is the complete gamma function.
 
 Four independent observations are sufficient to provide a 95\% confidence interval spanning 8-fold magnitude or a 99\% confidence interval spanning a 16-fold magnitude.
 Nine independent observations are sufficient for a 95\% confidence interval spanning a factor spanning 4-fold magnitude or a 99\% confidence interval spanning a factor of 6-fold magnitude.
@@ -299,19 +304,21 @@ A median-unbiased estimator $\hat{n}_\mathrm{mle}$ for population can be trivial
 
 \begin{align*}
 0
-&= 2\Gamma(k, -\hat{n}_\mathrm{mumle}\log(\prod_{i=1}^k x_i)) - \Gamma(k).
+&= 2\Gamma\Big(k, -\hat{n}_\mathrm{mumle}\log(\prod_{i=1}^k x_i)\Big) - \Gamma(k).
 \end{align*}
 
 \subsubsection{Credible Intervals}
 
-Computation of credible intervals facilitates bayesian experimental inference from population size estimators.
+Computation of credible intervals facilitates bayesian inference from population size estimators.
 Derivation assumes a uniform prior over population size.
-The credibility contained within a factor of the maximum likelihood estimate $\hat{n}_\mathrm{mle}$ can be calculated as
+The credibility contained within a factor $f$ of the maximum likelihood estimate $\hat{n}_\mathrm{mle}$ can be calculated as
 
 
 \begin{align*}
 \frac{- \gamma(k + 1, \frac{k}{f}) + \gamma(k + 1, f k)}{k!}.
 \end{align*}
+
+Here, $\gamma$ is the lower incomplete gamma function.
 
 By its form, the credibility contained within a factor of maximum likelihood estimate remains constant across population sizes $n$.
 Credibility intervals require similar sample sizes to provide $n$-fold magnitude spans as those for confidence intervals discussed above.
@@ -382,19 +389,19 @@ In this manner, set bits gradually propagate among the records of all gene copie
 In this manner, annotations' bit counts converge to reflect the number of gene copies present after generational delay $g$.
 Figure \ref{fig:copy-count-snapshot} summarizes the entire proposed distributed delayed copy count estimation mechanism.
 Under count of gene copies is possible under this mechanism (due to positional collisions between set bits or gene copy extinctions immediately subsequent to generation $g$), but --- notably --- over count is not.
-This conservative property supports confident detection of selection events --- these events would only be falsely detected due to true increases in copy count through drift, not due to instrumentation-associated error.
+This conservative property supports confident detection of selection events --- these events would only be falsely detected due to true increases in copy count through drift, not due to instrumentation-associated error.%
 \footnote{This conservative property holds under the assumption of no spurious differentia collision.}
 (This said, this conservative property could be sacrificed to increase sensitivity to larger copy counts with a given width bit field by only setting a bit at generation $g$ with small probability $p$.)
 
 A bit field with of 8 bytes and a snapshot delay of 16 generations were arbitrarily chosen for experiments reported here.
-Better sensitivity to weak selection events should be achievable through longer snapshot windows and larger bit fields, but likely this will be at the cost of diffusing signal from strong selection events.
-Future work should seek a principled procedure to pick appropriate snapshot window length and bit field widths based on experimental objectives and properties of the underlying evolutionary system.
+Better sensitivity to weak selection events should be achievable through longer snapshot windows and larger bit fields, but likely this will be at the cost of diluting signal from strong selection events.
+Future work should seek a principled procedure to decide appropriate snapshot window length and bit field widths apropos of experimental objectives and properties of the underlying evolutionary system (i.e., selection pressure).
 
 Positive selection can occur without advent of new allelic variants --- changes in environmental conditions can induce positive selection on an existing, potentially widespread allelic variant that was previously neutral.
 This scenario is called a ``soft'' sweep \citep{hermisson2005soft}.
-Weak sweeps should, in principle, be detectable to some extent through this methodology, as they involve increases in copy count at faster-than-drift rates.
+Soft sweeps should, in principle, be detectable to some extent through this methodology, as they involve increases in copy count at faster-than-drift rates.
 However, weak sweeps on very-widespread alleles that quickly reach fixation will register only a weak signal on this instrumentation because increases in descendant copy count are spread across the large number of preexisting allele copies.
-Although detectability of weak sweeps are not tested in this work, this consideration merits future work and may require alternate instrumentation designs.
+Although detectability of weak sweeps are not tested in this work, this issue merits consideration in future work.
 
 \subsection{Positive Selection Inference Experiment}
 \label{sec:positive-selection-inference-experiment}
@@ -410,7 +417,7 @@ For example, a value of 0.2 would give an average 20\% selective advantage.
 Fitness scores for each individual were calculated once per generation and used for all tournaments.
 
 All individuals were initialized with gene value 0.0.
-At generation 50, one organism's gene value was set to either 0.0\footnote{The smallest representable positive value was set for fitness advantage treatment 0.0 so the introduced gene could be differentiated from the background gene. Infinitesimal small value was used so as to have no meaningfully detectable effect on selection.}, 0.1, or 1.0.
+At generation 50, one organism's gene value was set to either 0.0,\footnote{The smallest representable positive value was set for fitness advantage treatment 0.0 so the introduced gene could be differentiated from the background gene. The smallest representable floating point value was used, so as to have no meaningfully detectable effect on selection.} 0.1, or 1.0.
 This operation was repeated at subsequent generations if the introduced gene value went extinct.
 This procedure enabled comparison of a strong selective sweep for the gene (fitness advantage 1.0), a weaker selective sweep for the gene (fitness advantage 0.1) and a control treatment where no fitness advantage was introduced and pure drift dynamics were at play (fitness advantage 0.0).
 Underlying selective sweep dynamics were measured by recording gene copy count at each generation.
@@ -420,7 +427,7 @@ Synchronous selection with tournament size 2 was performed each generation.
 All parents for the upcoming population were selected before turnover of the entire population.
 The crossover mating operator selected a gene value from among the two parents' genes with equal probability.
 No mutation was applied.
-Ten independent replicates were performed for each fitness advantage level treatment.
+Ten independent replicates were performed of each treatment.
 
 \subsection{Software \& Data}
 \label{sec:software-data}
@@ -428,7 +435,7 @@ Ten independent replicates were performed for each fitness advantage level treat
 Software, data, and analyses used in this work are hosted on GitHub at \url{github.com/mmore500/hstrat-recomb-concept/tree/notebooks/notebooks}.
 
 Data structures and algorithms associated with hereditary stratigraphy methodology are published in the hstrat Python package, made available on PyPi and on GitHub at \url{github.com/mmore500/hstrat} under the MIT license \citep{moreno2022hstrat}.
-Recombination features developed for this project, as well as corresponding C++ implementations of hereditary stratigraphy data structures and algorithms, are on the project's near-term roadmap.
+Recombination features developed for this project, as well as corresponding C++ implementations of hereditary stratigraphy data structures and algorithms, are on the hstrat project's roadmap.
 
 This project benefited greatly from open source scientific software, including BioPython \citep{cock2009biopython}, Distributed Evolutionary Algorithms in Python (DEAP) \citep{fortin2012deap}, Matplotlib \citep{hunter2007matplotlib}, NetworkX \citep{hagberg2008networkx}, Jupyter \citep{loizides2016jupyter}, pandas \citep{reback2020pandas,mckinney2010pandas}, SciPy \citep{pauli2020scipy}, seaborn \citep{waskom2021seaborn}, SymPy \citep{meurer2017sympy}, and tqdist \citep{sand2014tqdist}.
 The Artificial Life data standard for phylogenies facilitated tool interoperation \citep{lalejini2019data}.
