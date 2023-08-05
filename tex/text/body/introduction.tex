@@ -1,104 +1,59 @@
 \section{Introduction} \label{sec:introduction}
 
-Phylogenetic analysis has emerged as a critical component in the field of genetic programming, facilitating the nuanced understanding and manipulation of the evolutionary dynamics.
-By providing critical insights into how genetic algorithms evolve over time, phylogenetic analysis is a powerful tool for algorithm tuning and design.
-It enables us to identify effective patterns, allowing us to refine our strategies for developing more efficient and robust algorithms.
-For instance, an understanding of the phylogenetic dynamics can help us design more effective phylogeny-aware algorithms, such as NeuroEvolution of Augmenting Topologies (NEAT) \citep{stanley2002evolving} or lexicase downsampling through phylogeny-informed trait estimation (Lalejini, GPTP 2023). %CITE
-% These examples underscore the indispensability of phylogenetic analysis in genetic programming. % APPLICATIONS.
+The structure of hereditary relatedness with an evolved population captures substantial aspects of its evolutionary history \citep{dolson2019modes}.
+In the context of evolutionary computation (EC), such phylogenetic information can be diagnostic of systems' runtime dynamics and can afford useful guidance to the benefit of EC algorithm selection, tuning, and development.
+In fact, some work has even gone so far as to apply phylogenetic information to mediate recombination \citep{stanley2002evolving}, fitness estimation \citep{lalejini2023phylogeny}, and diversity maintenance schemes \citep{burke2003increased,murphy2008simple}.
 
-Burgeoning parallel and distributed computing power holds significant promise to enable profound advancements in genetic programming and digital evolution through increases to feasible population sizes, computation of more sophisticated genetic representations and developmental processes, and facilitation of more robust fitness evaluations.
-However, at very large scales, some traditional, centralized approaches to algorithmic administration of evolution become increasingly inefficient and brittle.
+Burgeoning parallel and distributed computing power promises to continue advancing the capabilities of evolutionary computation.
+Bigger population sizes, more sophisticated genetic representations, and more robust fitness evaluation will come into reach.
+Very large scale operation, however, will require renovation of methodologies poorly suited to parallel and distributed computing.
+Approaches relying on centralized control and total visibility, in particular, are expected to become increasingly inefficient and brittle.
 
-Phylogenetic tracking in digital evolution systems has traditionally been accomplished in a centralized manner through stitching together of parent-offspring relationships across all reproduction events within a system.
-Pruning phylogenetic records associated with extinct taxa is crucial to maintaining memory- and disk-tractability of phylogenetic record-keeping, but introduces runtime communication overhead between processing elements.
-At very large scales, data loss and hardware failure become nearly inevitable regular occurrences \citep{gropp2013programming}.
-Perfect phylogenetic tracking approaches are vulnerable to corruption from small amounts of information loss (i.e., disconnecting or misconnecting tree components).
+Phylogenetic tracking in digital evolution systems, in particular, has traditionally been accomplished in a centralized manner.
+Collecting and stitching together all parent-offspring relationships yields a perfect phylogenetic record.
+Even at the scale of a single processor, an entirely comprehensive record quickly becomes unwieldy.
+Fortunately, in asexual systems where offspring have exactly one parent, the extant population's lineages comprise only a miniscule fraction of all ancestors.
+Pruning away extinct lineages, therefore, typically sufficiently tempers memory use --- even for long-lasting runs with large population sizes.
+Sexual lineages (i.e., with multiple properties per offspring) do not exhibit this winnowing property.
+As such, application of the perfect tracking model becomes more challenging, although not entirely unheard of \citep{mcphee2018detailed,mcphee2016using,burlacu2013visualization}.
 
-Reconstruction-based approaches to phylogenetic analysis provide a possible solution.
-These operate akin to the phylogenomic paradigm in biology, where high-fidelty phylogenetic information is inferred through synthesis of genetic information associated with extant organisms.
-Although fully decentralized and robust to data loss, phylogenetic inference from biological genomes is notoriously complex, compute- and  data-intensive.
-Fortunately, the malleability of the digital substrate provides opportunity to sidestep such challenges through explicit design of genetic components that facilitate straightforward, efficient phylogenetic inference from small amounts of data.
+With complete central observability, extinction can be detected through reference counting --- making it fast and easy.
+Introducing a distributed computing model, where lineages wind across networks of independent nodes, however, greatly complicates matters.
+Now extinction notifications would have to wind back over the lineages' node-to-node migrations.
+Data loss, whether due to hardware failures, dropped messages, or some other imbroglio, exacerbates matters further still.
+Any eliminated extinction notification would entrench remnant records from the zombie lineage.
+More worrisome, though, data loss could entirely disjoin components of the phylogenetic record, introducing profound uncertainty as to how large compo relate.
+At very large scales, such concerns are expected to become near inevitabilities \citep{gropp2013programming}.
 
-This possibility motivated development of the ``hereditary stratigraphy'' technique for genetic annotations to facilitate phylogenetic inference \citep{moreno2022hereditary}.
-Briefly, this method works by applying heritable markers to individual digital genomes.
-At each generation, a randomly generated ``fingerprint'' value is generated and appended to each genome's annotation.
-Because pre-existing markers are faithfully inherited, the extent of common ancestry between two instrumented genomes can be deduced by aligning ``fingerprint'' values and identifying the first value where values diverge.
-From this point onwards, the two genomes are definitively known to not share common ancestry.
-Practical applications require pruning of ``fingerprint'' data to rapid accumulation of excessive genome bloat.
-Such pruning represents a directly-controllable trade-off between annotation memory use and inferential resolution.
+Although not traditionally performed in EC, phylogenetic analysis is possible without direct tracking.
+In fact, this is the \textit{de facto} paradigm within biological science, where phylogenetic relationships are largely inferred through comparisons among extant traits.
+Historically, this was on the basis of phenotypic characteristics, but as it became available genetic sequence data has become increasingly prevalent --- and powerful.
+Unfortunately, phylogenetic reconstruction is notoriously difficult, demanding vast quantities of data, software, and computation --- not to mention enough mathematical and algorithmic development as to become as to precipitate an entire field of study.
+Fortunately, EC can largely sidestep this plight.
 
-Existing work with hereditary stratigraphy has focused exclusively on inference over asexual lineages.
-As crossover and sexual recombination operations are integral to digital evolution --- and, particularly, genetic programming --- the existing methodology's restriction to asexual lineages is a major limitation.
-This work introduces techniques to apply hereditary stratigraphy methods to sexual lineages to facilitate robust, efficient inference of genealogical history, historical demography, and selection dynamics without centralized tracking.
-Such capabilities promise to enhance diagnostic telemetry, increase scientific observability, and enable application of phylogeny-aware evolutionary algorithms across diverse, large-scale digital evolution systems.
+The malleability of the digital substrate invites explicit design of genetic components that facilitate straightforward phylogenetic inference from small amounts of data with minimal computational overhead.
+This desideratum motivated recent development of ``hereditary stratigraphy,'' a design for digital genetic material expeditious to phylogenetic inference \citep{moreno2022hereditary}.
+The core mechanism of this technique is generation-on-generation accumulation of randomized ``fingerprint'' packets.
+Offspring inherit parents' fingerprint record and append an entry, before ultimately passing it along themselves.
+Each fingerprint serves as a kind of linealogical checkpoint.
 
-% For sexual populations, pedigree records
-% The vision is to develop a robust and possibly decentralized system, akin to cerebras, to manage these computational tasks effectively. %TODO
+Because these fingerprints are faithfully inherited each generation after their creation, discrepancy between coincident fingerprints implies divergent ancestry at their shared time point.
+So, the end of common ancestry necessarily precedes the first mismatching fingerprints.
 
+To establish practical viability, some attention must be paid to space complexity.
+Proceeding naively, perpetual fingerprint accumulation with each generation would hopelessly bloat memory use.
+Fortunately, the underlying inferential mechanism is amenable to thinning out fingerprints within hereditary stratigraph records.
+Pruned-away fingerprints introduce a commensurate uncertainty into estimation of two records' divergence generation.
+If every other fingerprint was pruned, for example, divergence generations would only be estimable to within 2 generations.
+In this way, flexibility in configuring what fingerprints to keep when directly provides for direct administration of the inherent trade-off between annotation memory use and inferential power.
+Although beyond present scope, significantly more can be said about this running fingerprint curation process --- the algorithmic core of hereditary stratigraphy.
+For detail, refer to \citep{moreno2022hereditary}.
 
-% This approach applies heritable markers to individual digital genomes to facilitate post-hoc reconstruction of phylogenetic history.
-% Each time a marker is inherited, a fresh random packet of data --- a ``fingerprint'' --- is generated and appended to the inherited marker.
-% To infer phylogenetic history, fingerprints from the markers of extant organisms are aligned and compared.
-% Identical fingerprints within the record signifies (likely) shared ancestry between organisms.
-% Conversely, the presence of a discrepancy in fingerprints definitively evidences divergence in ancestry at the generation those fingerprints were generated.
+Existing work with hereditary stratigraphy has restricted exclusively to asexual lineages (i.e., exactly one parent per offspring).
+Given the essential role of sexual recombination operations (i.e., crossover) in EC, effort to address this limitation is of key significance.
 
-
-% The study of sexual pedigrees introduces a new dimension to the conversation. %TODO
- %, largely because it increases the probability that organisms will have extant descendants.
-% The rapid history growth resulting from this dynamic makes perfect tracking challenging, even in serial situations, but it's a complexity we need to tackle.
-%
-% In this paper, we will elucidate how hereditary stratigraphy methods can be extended to sexual lineages.
-% The most apparent way to do this would be through gene-wise annotation, considering that gene trees share certain similarities with asexual lineages.
-% However, we also propose exploring genome-wise annotation as another effective method.
-%
-% Our objectives in this endeavor include species inference, which would involve tracking and reconstructing the history of subpopulations that don't interbreed.
-% This is closely related to describing the ``relatedness'' of organisms.
-% We aim to infer species $N_e$, that is, the effective population size, considering both the headcount and gene pool cutoffs. %TODO
-% This could provide valuable insights into events like range expansion bottlenecks.
-% Another objective is to detect positive selection on genes.
-%
-% In the following sections, we will demonstrate how these objectives can be achieved and how this approach contributes to the field of genetic programming and digital evolution.
-
-% - why phylogenetic analysis is important to genetic programming
-%   - diagnose evolutionary dynamics for algorithm tuning/design
-%     - need examples
-%   - phylogeny-aware algorithms
-%     - example like NEAT?
-%     - example: phylogeny-informed lexicase downsampling/estimation
-%
-% - why parallel and distributed methods are important for genetic programming and digital evolution
-%   - population size comparison
-%   - expensive evaluations
-%   - needs to be robust, maybe decentralized (cerebras)
-%
-% - recap existing hereditary stratigraphy work
-%   - space trade-offs
-%   - inference error vs phylogenetic metrics
-%   - axexual lineages
-%
-% - asexual lineages vs sexual pedigrees
-%   - why crossover/sexual recombination is important in genetic programming
-%   - many more organisms have extant descendants
-%   - very rapid history growth in that makes perfect tracking difficult even in serial situations
-%
-% - this paper covers how to extend hereditary stratigraphy methods to sexual lineages
-%   - gene-wise annotation is obvious way: gene trees have some similarities to asexual lineages
-%   - genome-wise annotation
-%
-% - objectives
-%   - species inference (i.e., track \& reconstruct history of subpopulations that don't interbreed)
-%     - related: describe ``relatedness'' of organisms
-%   - infer species Ne (effectie population size: headcount and gene pool cutoffs)
-%     - e.g., range expansion bottleneck events
-%   - detect positive selection on genes
-%
-% We show how these objectives can be fulfilled
-%
-%
-%
-% - recap results (maybe just in abstract; TODO add quantities)
-%   - species inference: reliably recover coarse-grained speciation history, recover relatedness
-%   - population size: reliably detect order-of magnitude population size changes and detect selection pressure in most cases
-%   - positive selection: reliably detect strong positive selection (1.0 relative fitness advantage), detect weaker (0.10 relative fitness advantage) in the majority of cases
-%
-% example \citep{gagliardi2019international}
+This work introduces techniques to apply hereditary stratigraphy methods to sexual lineages.
+Developed methods enable decentralized inference of (1) genealogical history, (2) population size fluctuations, and (3) selective sweeps.
+Such capabilities can enhance diagnostic telemetry, facilitative to application-oriented EC.
+Given the difficulties in managing the growth of sexual pedigree records, some aspects may prove useful even in the absence of multiprocessing.
+Digital evolution-based experiments in evolutionary research that incorporate sexual dynamics may also see applications of phylogenetic information to enhance scientific observability.
