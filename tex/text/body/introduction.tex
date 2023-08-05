@@ -33,22 +33,6 @@ Fortunately, EC can largely sidestep this plight.
 
 The malleability of the digital substrate invites explicit design of genetic components that facilitate straightforward phylogenetic inference from small amounts of data with minimal computational overhead.
 This desideratum motivated recent development of ``hereditary stratigraphy,'' a design for digital genetic material expeditious to phylogenetic inference \citep{moreno2022hereditary}.
-The core mechanism of this technique is generation-on-generation accumulation of randomized ``fingerprint'' packets.
-Offspring inherit parents' fingerprint record and append an entry, before ultimately passing it along themselves.
-Each fingerprint serves as a kind of linealogical checkpoint.
-
-Because these fingerprints are faithfully inherited each generation after their creation, discrepancy between coincident fingerprints implies divergent ancestry at their shared time point.
-So, the end of common ancestry necessarily precedes the first mismatching fingerprints.
-
-To establish practical viability, some attention must be paid to space complexity.
-Proceeding naively, perpetual fingerprint accumulation with each generation would hopelessly bloat memory use.
-Fortunately, the underlying inferential mechanism is amenable to thinning out fingerprints within hereditary stratigraph records.
-Pruned-away fingerprints introduce a commensurate uncertainty into estimation of two records' divergence generation.
-If every other fingerprint was pruned, for example, divergence generations would only be estimable to within 2 generations.
-In this way, flexibility in configuring what fingerprints to keep when directly provides for direct administration of the inherent trade-off between annotation memory use and inferential power.
-Although beyond present scope, significantly more can be said about this running fingerprint curation process --- the algorithmic core of hereditary stratigraphy.
-For detail, refer to \citep{moreno2022hereditary}.
-
 Existing work with hereditary stratigraphy has restricted exclusively to asexual lineages (i.e., exactly one parent per offspring).
 Given the essential role of sexual recombination operations (i.e., crossover) in EC, effort to address this limitation is of key significance.
 

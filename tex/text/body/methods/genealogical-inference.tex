@@ -1,0 +1,59 @@
+\subsection{Genealogical Inference}
+\label{sec:genealogical-inference}
+
+Sections \ref{sec:allopatry-treatment,sec:ring-treatment,sec:bag-treatment} describe the three treatments compared to test the proposed genealogical inference mechanisms.
+Section \ref{sec:phylogeny-extraction} lays details the procedure used to convert recorded sexual pedigrees to phylogenetic trees that reconstruction quality could be evaluated against.
+
+This experiment tested the quality of genealogical history recovered from species-level hereditary stratigraph annotation.
+Phylogenetic reconstruction quality was tested over three evolutionary treatments.
+The first, ``allopatry,'' covered full speciation through introduction of a strict reproductive barrier among subpopulations.
+The second, ``ring,'' covered partial phylogenetic structure over subpopulations linked through small amounts of migration.
+A third --- as a control --- was designed to lack meaningful phylogenetic structure at all due to well-mixed interbreeding ensuring close relatedness between all population members.
+Ten independent replicates were performed for each treatment.
+
+The experiment was performed on the one-max problem domain described in Section \ref{sec:one-max}.
+After the 200th and final generation, the species-level annotations extracted from each of the extant organisms.
+Phylogenetic structure was reconstructed using from these annotations using the agglomerative trie-based reconstruction techniques developed in \citep{moreno2023toward}.
+(Essentially, the phylogeny is constructed so that organisms track the lineage they share the most consecutive ``fingerprint'' differentia with and then branch out at the point of the first disparity in differentia value.
+
+To evaluate reconstruction quality, inferred phylogenies were compared to references extracted directly from underlying sexual pedigree record of the simulation using the MRCA-based UPGMA methods described in Section \ref{sec:phylogeny-extraction}.
+Disagreement between reconstruction and reference was quantified using the quartet tree distance metric \citep{estabrook1985comparison}.
+
+Additionally, inferred phylogenies were visualized to confirm whether reconstructions recovered the major features of treatments' evolutionary histories.
+
+\subsubsection{Allopatry Treatment}
+\label{sec:allopatry-treatment}
+
+This treatment simulates 100 generations of well-mixed sympatric evolution.
+At generation 100, the population is divided into two 50-member subpopulations.
+These subpopulations evolve independently with no migration for 50 generations.
+Then, at generation 150, the first subpopulation is split again into five 10-member subpopulations.
+The remaining 50-member subpopulation and the five new 10-member subpopulations then evolve independently with no migration for a further 50 generations.
+Phylogenetic reconstruction from this treatment should ideally recover a binary branching at generation 100 followed by a secondary quintuple-branching along one lineage at generation 150.
+
+\subsubsection{Ring Treatment}
+\label{sec:ring-treatment}
+
+This treatment splits the population into ten distinct subpopulations (islands), each of which evolved independently.
+The subpopulations were arranged in a ring topology, and one individual migrated between adjacent populations per generation happens once per generation.
+
+\subsubsection{Bag Treatment}
+\label{sec:bag-treatment}
+
+This treatment selects and recombines individuals uniformly from across the entire population.
+As such, all individuals extant at simulation completion are closely related so no meaningful phylogenetic structure exists to be detected.
+
+\subsubsection{Phylogeny Extraction from Pedigree Records}
+\label{sec:phylogeny-extraction}
+
+In order to provide a baseline reference to evaluate annotation-based phylogenetic reconstructions against, phylogenetic relationships between extant organisms (i.e., an asexual tree describing ``relatedness'') were extracted from sexual pedigrees (i.e., a reticulated directed acyclic graph describing ancestry).
+
+Such conversion has fundamental limitations: in well-mixed populations of modest size, structured differences in phylogenetic relatedness do not meaningfully exist.
+However, speciation and spatial structure can introduce meaningful aspects of phylogenetic structure.
+
+A naive technique was used to distill phylogenetic relationships from pedigree data.
+Most Recent Common Ancestors (MRCA) were computed pairwise from the pedigree data to construct a distance matrix among extant individuals.
+Unweighted Pair Group Method with Arithmetic mean (UPGMA) reconstruction based on this distance matrix yielded inferred phylogenetic structure \citep{sokal1958university}.
+Finally, corrections to branch lengths were performed to accurately position the terminal nodes (i.e., extant organisms) at their known generational depths.
+
+No effort was made to cluster extant organisms into taxa based on a relatedness threshold, so reconstructions contained non-informative branch structure among closely-related individuals.
