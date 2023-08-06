@@ -1,7 +1,13 @@
-\documentclass{article}
+\documentclass[graybox]{svmult}
+
+% choose options for [] as required from the list
+% in the Reference Guide
 
 \input{lib/dependencies.tex}
-\input{lib/pragmaonce.tex}
+
+\makeindex            % used for the subject index
+                      % please use the style svind.ist with
+                      % your makeindex program
 
 \ifdefined\mydraft
 \mydraft
@@ -12,15 +18,9 @@
 
 \begin{document}
 
-\input{text/frontmatter.tex}
-
 \begin{bibunit}
 
-\input{text/body.tex}
-
-\input{text/acknowledgement.tex}
-
-\input{text/references.tex}
+\input{author.tex}
 
 \end{bibunit}
 
