@@ -90,14 +90,15 @@ Suppose independent populations of size $a$ and $b$.
 The largest gene in each population will drive to fixation.
 If each population members' gene is drawn from uniform distribution on integers $[0, u)$, then the probability of collision between the populations' fixed genes can be derived as
 
+\begin{scriptsize}
 \begin{align*}
-\frac{a \sum_{n=1}^{a + b - 1} \frac{u^{- n - 1} \left(\frac{u - 1}{u}\right)^{a + b - n - 1} \left(- \frac{{\binom{a - 1}{n}}}{{\binom{a + b - 1}{n}}} + 1\right) {\binom{a + b}{n + 1}}}{1 - \left(\frac{u - 1}{u}\right)^{a + b - 1}}}{a + b} \\
-+ \frac{b \sum_{n=1}^{a + b - 1} \frac{u^{- n - 1} \left(\frac{u - 1}{u}\right)^{a + b - n - 1} \left(- \frac{{\binom{b - 1}{n}}}{{\binom{a + b - 1}{n}}} + 1\right) {\binom{a + b}{n + 1}}}{1 - \left(\frac{u - 1}{u}\right)^{a + b - 1}}}{a + b}.
+\frac{a}{a + b}\sum_{n=1}^{a + b - 1} \frac{u^{- n - 1} \left(\frac{u - 1}{u}\right)^{a + b - n - 1} \left(1 - \frac{{\binom{a - 1}{n}}}{{\binom{a + b - 1}{n}}} \right) {\binom{a + b}{n + 1}}}{1 - \left(\frac{u - 1}{u}\right)^{a + b - 1}}
++ \frac{b}{a + b} \sum_{n=1}^{a + b - 1} \frac{u^{- n - 1} \left(\frac{u - 1}{u}\right)^{a + b - n - 1} \left(1 - \frac{{\binom{b - 1}{n}}}{{\binom{a + b - 1}{n}}} \right) {\binom{a + b}{n + 1}}}{1 - \left(\frac{u - 1}{u}\right)^{a + b - 1}}.
 \end{align*}
-
+\end{scriptsize}
 % Derivation will be provided in supplementary materials. TODO?
 
-For 32-bit differentia $u = 2^{32}$, collision occurs with $p < 0.5$ ($p = 0.46$) for two populations of size $a = b = 2^{32}$ .
+For 32-bit differentia $u = 2^{32}$, collision occurs with $p < 0.5$ ($p = 0.46$) for two populations of size $a = b = 2^{32}$.
 Collision occurs with $p < 0.01$ for two populations of size $a = b = 2^{26}$.
 So, 32-bit fingerprints can differentiate species pairs of around$ 6.7 \times 10^{7}$ members each with reasonable consistency.
 Reported experiments used 64-bit fingerprint values, which will exhibit even lower collision probabilities.
