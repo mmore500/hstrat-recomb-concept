@@ -28,22 +28,28 @@ Derivations are available at \url{https://github.com/mmore500/hereditary-stratig
 
 \textit{Maximum Likelihood Estimator}
 The maximum likelihood estimator for population size given $i$ independent observations of fixed-gene magnitude $x_i$ is
+\begin{footnotesize}
 \begin{align} \label{eqn:popsize_mle}
 \hat{n}_\mathrm{mle} = -\frac{k}{\sum_{i=1}^k \log( x_i )}.
 \end{align}
+\end{footnotesize}
 
 Mean square error of the maximum likelihood estimator for population size given $k$ observations of fixed gene magnitude is
 
+\begin{footnotesize}
 \begin{align*}
 n^2 \frac{k^{2}+ k-2}{(k-1)^{2}(k-2)}.
 \end{align*}
+\end{footnotesize}
 
 Expected value for the maximum likelihood population size estimator $\hat{n}_\mathrm{mle}$ is given as
 
+\begin{footnotesize}
 \begin{align*}
 E(\hat{n}_\mathrm{mle})
 = n\frac{k}{k-1}
 \end{align*}
+\end{footnotesize}
 
 for $k>1$.
 This value can be subtracted from the maximum likelihood estimator to yield a mean-unbiased population size estimator.
@@ -56,28 +62,34 @@ Formulations derived from the maximum likelihood estimator are provided below.
 
 For a single observation of fixed gene magnitude $\hat{x}$, the population size $n$ can be estimated with $c\%$ confidence to fall within the interval
 
+\begin{footnotesize}
 \begin{align*}
 \Big(
 \frac{\log(\frac{1+c/100}{2})}{\log\hat{x}},
 \frac{\log(\frac{1-c/100}{2})}{\log\hat{x}}
 \Big).
 \end{align*}
+\end{footnotesize}
 
 At this low observational power, the 95\% confidence interval spans a 145-fold order of magnitude and a 99\% confidence interval spans a 1057-fold order of magnitude.
 
 For $k$ observations of fixed gene magnitude $\hat{x}_i$, the population size $n$ can be estimated with $c\%$ confidence to fall within the interval $(\hat{n}_\mathrm{lb}, \hat{n}_\mathrm{ub})$ where $\hat{n}_\mathrm{lb}$ is the solution to
 
+\begin{footnotesize}
 \begin{align} \label{eqn:popsize_mle_ci_lb}
 0
 &= 2\Gamma\Big(k, -\hat{n}_\mathrm{lb}\log(\prod_{i=1}^k\hat{x}_i)\Big) - (c/100+1)\Gamma(k)
 \end{align}
+\end{footnotesize}
 
 and $\hat{n}_\mathrm{ub}$ is the solution to
 
+\begin{footnotesize}
 \begin{align} \label{eqn:popsize_mle_ci_ub}
   0
   &= 2\Gamma\Big(k, -\hat{n}_\mathrm{ub}\log(\prod_{i=1}^k\hat{x}_i)\Big) - (1-c/100)\Gamma(k).
 \end{align}
+\end{footnotesize}
 
 Here, $\Gamma$ is the complete gamma function.
 
@@ -90,20 +102,23 @@ Note that the width of the confidence interval will scale as a constant factor o
 \textit{Median-unbiased Estimator.}
 A median-unbiased estimator $\hat{n}_\mathrm{mle}$ for population can be trivially derived from the confidence interval, as the numerical solution of
 
+\begin{footnotesize}
 \begin{align*}
 0
 &= 2\Gamma\Big(k, -\hat{n}_\mathrm{mumle}\log(\prod_{i=1}^k x_i)\Big) - \Gamma(k).
 \end{align*}
+\end{footnotesize}
 
 \textit{Credible Intervals.}
 Computation of credible intervals facilitates bayesian inference from estimators.
 Derivation assumes a uniform prior over population size.
 The credibility contained within a factor $f$ of the maximum likelihood estimate $\hat{n}_\mathrm{mle}$ can be calculated as
 
-
+\begin{footnotesize}
 \begin{align*}
 \frac{- \gamma(k + 1, \frac{k}{f}) + \gamma(k + 1, f k)}{k!}.
 \end{align*}
+\end{footnotesize}
 
 Here, $\gamma$ is the lower incomplete gamma function.
 
