@@ -30,28 +30,12 @@ Section \ref{sec:software-data} links to full derivations.
 The maximum likelihood estimator for population size given $k$ independent observations of fixed-gene magnitude $x_i$ is
 \begin{footnotesize}
 \begin{align} \label{eqn:popsize_mle}
-\hat{n}_\mathrm{mle} = -\frac{k}{\sum_{i=1}^k \log( x_i )}.
+\hat{n}_\mathrm{mle} = -k/\textstyle\sum_{i=1}^k \log( x_i ).
 \end{align}
 \end{footnotesize}
 
-Mean square error of the maximum likelihood estimator for population size given $k$ observations of fixed gene magnitude is
-
-\begin{footnotesize}
-\begin{align*}
-n^2 \frac{k^{2}+ k-2}{(k-1)^{2}(k-2)}.
-\end{align*}
-\end{footnotesize}
-
-Expected value for the maximum likelihood population size estimator $\hat{n}_\mathrm{mle}$ is given as
-
-\begin{footnotesize}
-\begin{align*}
-E(\hat{n}_\mathrm{mle})
-= n\frac{k}{k-1}
-\end{align*}
-\end{footnotesize}
-
-for $k>1$.
+Mean square error of the maximum likelihood estimator for population size is $\mathrm{MSE}(\hat{n}_\mathrm{mle}) = (n^2 (k^{2}+ k-2) / [(k-1)^{2}(k-2)]$.
+Expected value for the maximum likelihood population size estimator $\hat{n}_\mathrm{mle}$ follows as $\mathrm{E}(\hat{n}_\mathrm{mle}) = nk/(k-1)$ for $k>1$.
 This value can be subtracted from the maximum likelihood estimator to yield a mean-unbiased population size estimator.
 Maximum likelihood estimator results were also derived in \citep{varagnolo2010distributed}.
 
@@ -63,10 +47,10 @@ For a single observation of fixed gene magnitude $\hat{x}$, the population size 
 
 \begin{footnotesize}
 \begin{align*}
-\Big(
-\frac{\log(\frac{1+c/100}{2})}{\log\hat{x}},
-\frac{\log(\frac{1-c/100}{2})}{\log\hat{x}}
-\Big).
+\Big[
+\log\Big(\frac{50+c/2}{100}\Big) / \log\hat{x}, \,
+\log\Big(\frac{50-c/2}{100}\Big) / \log\hat{x}
+\Big].
 \end{align*}
 \end{footnotesize}
 
@@ -75,18 +59,11 @@ At this low observational power, the 95\% confidence interval spans a 145-fold o
 For $k$ observations of fixed gene magnitude $\hat{x}_i$, the population size $n$ can be estimated with $c\%$ confidence to fall within the interval $(\hat{n}_\mathrm{lb}, \, \hat{n}_\mathrm{ub})$, computed by numerical solution of
 
 \begin{footnotesize}
-\begin{align} \label{eqn:popsize_mle_ci_lb}
+\begin{align}
 0
-&= 2\Gamma\Big(k, -\hat{n}_\mathrm{lb}\log(\prod_{i=1}^k\hat{x}_i)\Big) - (c/100+1)\Gamma(k)
-\end{align}
-\end{footnotesize}
-
-and $\hat{n}_\mathrm{ub}$ is the solution to
-
-\begin{footnotesize}
-\begin{align} \label{eqn:popsize_mle_ci_ub}
-  0
-  &= 2\Gamma\Big(k, -\hat{n}_\mathrm{ub}\log(\prod_{i=1}^k\hat{x}_i)\Big) - (1-c/100)\Gamma(k).
+= 2\Gamma\Big(k, -\hat{n}_\mathrm{lb}\sum_{i=1}^k \log\hat{x}_i\Big) - \Gamma(k)\frac{100+c}{100} \text{ and }
+0
+= 2\Gamma\Big(k, -\hat{n}_\mathrm{ub}\sum_{i=1}^k \log\hat{x}_i\Big) - \Gamma(k)\frac{100-c}{100}.  \label{eqn:popsize_mle_ci}
 \end{align}
 \end{footnotesize}
 
@@ -107,7 +84,7 @@ The credibility contained within a factor $f$ of the maximum likelihood estimate
 
 \begin{footnotesize}
 \begin{align*}
-\frac{- \gamma(k + 1, \frac{k}{f}) + \gamma(k + 1, f k)}{k!}.
+\gamma(k + 1, f k)/k! - \gamma(k + 1, k/f)/k!.
 \end{align*}
 \end{footnotesize}
 
@@ -129,7 +106,7 @@ Population size estimates can be computed at each generation using the maximum l
 The true population size is annotated as a horizontal blue line.
 
 To generate more robust inference, inference was pooled over rolling sets of 10 fixed differentia.
-Population size estimates were again performed using Equation \ref{eqn:popsize_mle} with confidence interval bounds computed from Equations \ref{eqn:popsize_mle_ci_lb} and \ref{eqn:popsize_mle_ci_ub}.
+Population size estimates were again performed using Equation \ref{eqn:popsize_mle} with confidence interval bounds computed via Equation \ref{eqn:popsize_mle_ci}.
 Figure \ref{fig:ne-process-example:running-est} plots this running estimation.
 Note that some discrepancy is expected between absolute population size (horizontal line) and effective population size $N_e$ (estimated) due to demographic factors.
 
