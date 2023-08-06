@@ -1,34 +1,32 @@
-\begin{sidewaysfigure}
+\begin{figure}
   \centering
-  \begin{minipage}{.7\textwidth} % adjust the width as needed
+  \begin{minipage}{\textwidth} % adjust the width as needed
 
     \begin{minipage}{\textwidth}
       \centering
-      \includegraphics[height=0.30\textheight]{img/copy-count-snapshot}
+      \includegraphics[height=0.25\textheight]{img/copy-count-snapshot}
       \subcaption{Cartoon depiction of delayed copy count estimation mechanism, annotated over Muller plot depicting weak selection over focal allele.
       }
       % \label{fig:ne-example-replicates:bottleneck}
     \end{minipage}%
-
-    \vspace{1cm}
-
-    \begin{minipage}{0.47\textwidth}
+    \hfill
+    \begin{minipage}{0.46\textwidth}
       \centering
       \includegraphics[height=0.2\textheight]{notebooks/notebooks/teeplots/fit=0.0+hue=clade+multiple=stack+ngen=16+npop=100+palette=set2+viz=histplot+x=generation+ext=}
       \subcaption{Muller plot depicting no selection for focal allele, ending with smaller copy count after 16 generations.}
       % \label{fig:ne-example-replicates:selection_pressure}
     \end{minipage}
-    \,
-    \begin{minipage}{0.47\textwidth}
+    \hfill
+    \begin{minipage}{0.46\textwidth}
       \centering
       \includegraphics[height=0.2\textheight]{notebooks/notebooks/teeplots/fit=1.0+hue=clade+multiple=stack+ngen=16+npop=100+palette=set2+viz=histplot+x=generation+ext=}
       \subcaption{Muller plot depicting strong selection for focal allele, with fixation occuring before 16 generations.}
       % \label{fig:ne-example-replicates:control}
     \end{minipage}
-
+    \hfill
   \end{minipage}
-  \hfill % Creates horizontal space. Can also use \hspace{<len>}
-  \begin{minipage}{.25\textwidth} % adjust the width as needed
+  \begin{minipage}{\textwidth} % adjust the width as needed
+    \vspace{5ex}
     \caption{
       Proposed mechanism for detecting gene-level selection via a distributed delayed copy count estimation mechanism.
       Strata deposited at generation $n$ progress through 16 generations, with copy count of one allele growing due to selection.
@@ -41,7 +39,7 @@
     \label{fig:ne-example-replicates}
   \end{minipage}
 
-\end{sidewaysfigure}
+\end{figure}
 
 
 % notebooks/notebooks/teeplots/notebook=ne-inference+replicate=0+treatment=bottleneck+viz=plot-running-estimation+x=rank+y=population-size+ext=.pdf
