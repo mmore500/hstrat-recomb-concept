@@ -50,7 +50,8 @@ For example, a value of 0.2 would give an average 20\% selective advantage.
 Fitness scores for each individual were calculated once per generation and used for all tournaments.
 
 All individuals were initialized with gene value 0.0.
-At generation 50, one organism's gene value was set to either 0.0,\footnote{The smallest representable positive value was set for fitness advantage treatment 0.0 so the introduced gene could be differentiated from the background gene. The smallest representable floating point value was used, so as to have no meaningfully detectable effect on selection.} 0.1, or 1.0.
+At generation 50, one organism's gene value was set to either 0.0,\footnote{The smallest representable floating point value was set for fitness advantage treatment 0.0 so the introduced gene could be differentiated from the background gene.
+This value was small enough as to have no meaningfully detectable effect on selection.} 0.1, or 1.0.
 This operation was repeated at subsequent generations if the introduced gene value went extinct.
 This procedure enabled comparison of a strong selective sweep for the gene (fitness advantage 1.0), a weaker selective sweep for the gene (fitness advantage 0.1) and a control treatment where no fitness advantage was introduced and pure drift dynamics were at play (fitness advantage 0.0).
 Underlying selective sweep dynamics were measured by recording gene copy count at each generation.
