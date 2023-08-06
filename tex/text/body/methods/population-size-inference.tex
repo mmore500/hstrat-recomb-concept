@@ -42,16 +42,7 @@ Maximum likelihood estimator results were also derived in \citep{varagnolo2010di
 Computation of confidence intervals is necessary of facilitate experimental inference from population size estimators.
 Formulations derived from the maximum likelihood estimator are provided below.
 
-For a single observation of fixed gene magnitude $\hat{x}$, the population size $n$ can be estimated with $c\%$ confidence to fall within the interval
-
-\begin{footnotesize}
-\begin{align*}
-\Big[
-\log\Big(\frac{50+c/2}{100}\Big) / \log\hat{x}, \,
-\log\Big(\frac{50-c/2}{100}\Big) / \log\hat{x}
-\Big].
-\end{align*}
-\end{footnotesize}
+For a single observation of fixed gene magnitude $\hat{x}$, the population size $n$ can be estimated with $c\%$ confidence to fall between lower bound $\log[(50+0.5c)/100] / \log\hat{x}$ and upper bound $\log[(50-0.5c)/100] / \log\hat{x}$.
 
 At this low observational power, the 95\% confidence interval spans a 145-fold order of magnitude and a 99\% confidence interval spans a 1057-fold order of magnitude.
 
@@ -79,14 +70,7 @@ A median-unbiased estimator for population can be trivially derived as the numer
 \textit{Credible Intervals.}
 Computation of credible intervals facilitates bayesian inference from estimators.
 Derivation assumes a uniform prior over population size.
-The credibility contained within a factor $f$ of the maximum likelihood estimate $\hat{n}_\mathrm{mle}$ can be calculated as
-
-\begin{footnotesize}
-\begin{align*}
-\gamma(k + 1, f k)/k! - \gamma(k + 1, k/f)/k!.
-\end{align*}
-\end{footnotesize}
-
+The credibility contained within a factor $f$ of the maximum likelihood estimate $\hat{n}_\mathrm{mle}$ can be calculated as $\gamma(k + 1, f k)/k! - \gamma(k + 1, k/f)/k!$.
 Here, $\gamma$ is the lower incomplete gamma function.
 By its form, the credibility contained within a factor of maximum likelihood estimate remains constant across population sizes $n$.
 Credibility intervals require similar sample sizes to provide $n$-fold magnitude spans as those for confidence intervals discussed above.
