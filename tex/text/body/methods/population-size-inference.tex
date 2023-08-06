@@ -1,14 +1,9 @@
 \subsection{Population Size Inference}
 \label{sec:population-size-inference}
 
-Section \ref{sec:population-size-inference-principle} recaps the mechanistic principle behind distributed population size estimation and Section \ref{sec:population-size-inference-stats} reports statistical formulations derived to perform distributed population size estimation.
-Section \ref{sec:ne-process-example} explains population size inference over an example evolutionary replicate.
+This section introduces the mechanistic principle behind distributed population size estimation, reports statistical formulations derived to perform distributed population size estimation, illustrates an example of inference scenario, then describes the three treatments compared to test the proposed population size inference mechanism.
 
-Section \ref{sec:population-size-inference-experiments} describes the three treatments compared to test the proposed population size inference mechanism.
-
-\subsubsection{Population Size Inference Principle}
-\label{sec:population-size-inference-principle}
-
+\textbf{Inference Principle.}
 Consider a population composed of $n$ individuals, each holding a unique gene represented as an unsigned integer of a given precision.
 At the outset, each gene value is assumed to be drawn from a uniform distribution across all possible values.
 As generations evolve through sexual recombination, a ``gene drive'' mechanism is enforced where offspring inherit the larger gene value from their parents.
@@ -27,14 +22,11 @@ In these schemes, nodes independently draw a random vector of numerical values f
 Values are exchanged through an aggregating function like (e.g., minimum, maximum, etc.), ultimately resulting in a consensus value fixing within the network.
 Each node can then independently infer probabilistic information about the larger network, in a manner that is generally consistent across nodes.
 
-\subsubsection{Population Size Inference Statistics}
-\label{sec:population-size-inference-stats}
-
+\textbf{Population Size Estimator Statistics.}
 Statistical details necessary to work with the fixed-gene-magnitude inference method follow, some of which are, to best knowledge, not yet reported.
 Derivations are available at \url{https://github.com/mmore500/hereditary-stratigraph-concept/tree/master/binder/popsize}, and will be included in supplemental material.
 
-\paragraph{Maximum Likelihood Estimator}
-
+\textit{Maximum Likelihood Estimator}
 The maximum likelihood estimator for population size given $i$ independent observations of fixed-gene magnitude $x_i$ is
 \begin{align} \label{eqn:popsize_mle}
 \hat{n}_\mathrm{mle} = -\frac{k}{\sum_{i=1}^k \log( x_i )}.
@@ -46,10 +38,6 @@ Mean square error of the maximum likelihood estimator for population size given 
 n^2 \frac{k^{2}+ k-2}{(k-1)^{2}(k-2)}.
 \end{align*}
 
-These results were also derived in \citep{varagnolo2010distributed}.
-
-\paragraph{Maximum Likelihood Estimator Expected Value}
-
 Expected value for the maximum likelihood population size estimator $\hat{n}_\mathrm{mle}$ is given as
 
 \begin{align*}
@@ -57,11 +45,12 @@ E(\hat{n}_\mathrm{mle})
 = n\frac{k}{k-1}
 \end{align*}
 
-for $k>1$ \citep{varagnolo2010distributed}.
+for $k>1$.
 This value can be subtracted from the maximum likelihood estimator to yield a mean-unbiased population size estimator.
 
-\paragraph{Confidence Interval}
+Maximum likelihood estimator results were also derived in \citep{varagnolo2010distributed}.
 
+\textit{Confidence Interval.}
 Computation of confidence intervals is necessary of facilitate experimental inference from population size estimators.
 Formulations derived from the maximum likelihood estimator are provided below.
 
@@ -98,8 +87,7 @@ Nine independent observations are sufficient for a 95\% confidence interval span
 
 Note that the width of the confidence interval will scale as a constant factor of as $n \to \infty$.
 
-\paragraph{Median-unbiased Estimator}
-
+\textit{Median-unbiased Estimator.}
 A median-unbiased estimator $\hat{n}_\mathrm{mle}$ for population can be trivially derived from the confidence interval, as the numerical solution of
 
 \begin{align*}
@@ -107,8 +95,7 @@ A median-unbiased estimator $\hat{n}_\mathrm{mle}$ for population can be trivial
 &= 2\Gamma\Big(k, -\hat{n}_\mathrm{mumle}\log(\prod_{i=1}^k x_i)\Big) - \Gamma(k).
 \end{align*}
 
-\paragraph{Credible Intervals}
-
+\textit{Credible Intervals.}
 Computation of credible intervals facilitates bayesian inference from estimators.
 Derivation assumes a uniform prior over population size.
 The credibility contained within a factor $f$ of the maximum likelihood estimate $\hat{n}_\mathrm{mle}$ can be calculated as
@@ -123,16 +110,12 @@ Here, $\gamma$ is the lower incomplete gamma function.
 By its form, the credibility contained within a factor of maximum likelihood estimate remains constant across population sizes $n$.
 Credibility intervals require similar sample sizes to provide $n$-fold magnitude spans as those for confidence intervals discussed above.
 
-\paragraph{Rolling Population Size Estimation} \label{sec:rolling_estimation}
-
+\textit{Rolling Population Size Estimation.}
 Experiments reported here use a simple rolling process to aggregate ten preceding fixed-gene magnitudes to compute a population size estimate and confidence intervals.
 More sophisticated regularizations have been proposed to consolidate time series estimates of dynamically-changing network sizes \citep{hakan2012distributed}.
 
-\subsubsection{Example Population Size Inference}
-\label{sec:ne-process-example}
-
 \input{fig/ne-process-example}
-
+\textbf{Population Size Inference Example.}
 Figure \ref{fig:ne-process-example} shows an example of population size inference over the course of an experiment.
 
 Panel \ref{fig:ne-process-example:differentia} shows magnitudes of fixed differentia across the generational record extracted from a sample specimen at the end of the run.
@@ -145,10 +128,8 @@ Population size estimates were again performed using Equation \ref{eqn:popsize_m
 Figure \ref{fig:ne-process-example:running-est} plots this running estimation.
 Note that some discrepancy is expected between absolute population size (horizontal line) and effective population size $N_e$ (estimated) due to demographic factors.
 
-\subsubsection{Population Size Inference Experiment}
-\label{sec:population-size-inference-experiments}
-
-The experiment tested the ability of the population size estimation process (Section \ref{sec:ne-process-example} to detect effective population size differences between populations and effective population size changes within a population over time.
+\textbf{Validation Experiment.}
+The experiment tested the ability of the population size estimation process to detect effective population size differences between populations and effective population size changes within a population over time.
 Four different treatment conditions were compared: bottleneck, range expansion, selection pressure, and control.
 Ten independent replicates were performed for each treatment.
 

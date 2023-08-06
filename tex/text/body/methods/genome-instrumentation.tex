@@ -1,17 +1,15 @@
 \subsection{Genome Instrumentation}
 \label{sec:genome-instrumentation}
 
-Section \ref{sec:instrumentation} reviews hereditary stratigraphic annotation methodology as originally developed for inference over asexual populations and introduces the gene- and species-level instrumentation strategies proposed to apply it to sexual populations.
+This section reviews hereditary stratigraphic annotation methodology as originally developed for inference over asexual populations and introduces the gene- and species-level instrumentation strategies proposed to apply it to sexual populations.
 The former strategy is used for positive selection inference and the later is used for genealogical and population size inference.
 
-Section \ref{sec:gene-drive} overviews the recombination and gene drive mechanisms employed for species-level instrumentation.
-Section \ref{sec:collision-probability} evaluates the extent to which this methodology increases the expected rate of spurious differentia collision, which can lead to overestimation of relatedness from hereditary stratigraph instrumentation.
+Subsequent discussion describes recombination and gene drive mechanisms employed for species-level instrumentation and evaluates the extent to which this methodology increases the expected rate of spurious differentia collision, which can lead to overestimation of relatedness from hereditary stratigraph instrumentation.
 
 
 % \input{fig/deposit-prune-example.tex}
 % \input{fig/retention-policy-matrix.tex}
-\subsubsection{Hereditary Stratigraphy}
-
+\textbf{Hereditary Stratigraphy.}
 Proposed methods for genealogical and evolutionary inference over distributed sexual populations draw on ``hereditary stratigraphy'' technique, originally developed to facilitate phylogenetic inference over asexual populations \citep{moreno2022hstrat}.
 The core mechanism of this technique is generation-on-generation accumulation of randomized ``fingerprint'' packets.
 Offspring inherit parents' fingerprint record and append an entry.
@@ -39,10 +37,8 @@ This work uses 64 bit fingerprints, which collide spuriously with negligible pro
 At population size 100 over 200 generations, as in the first sets of reported experiments, the probability of any collision is miniscule, $< 2 \times 10^{-15}$.
 At population size 200 over 400 generations, as in the last set of reported experiments, the probability of any collision is also miniscule, $< 5 \times 10^{-15}$.
 
-\subsubsection{Sexual Instrumentation Schemes}
-
 \input{fig/annotation-types.tex}
-
+\textbf{Sexual Instrumentation Schemes.}
 As originally devised for asexual populations, hereditary stratigraphic markers followed a one-to-one relationship to genomes.
 Here, we explore two alternate schemes designed for instrumentation of sexual populations: gene instrumentation and species instrumentation.
 Figure \ref{fig:annotation-types} compares these two schemes.
@@ -55,19 +51,14 @@ In cases where digital chromosomes comprise a relatively small number of atomic 
 However, in applications with very fine atomic genes (e.g., individual GP instructions) or no atomic genes (e.g., GA floating point values subjected to interpolation during crossover) may warrant instrumentation of a representative subset of genes or introduction of ``dummy'' genes associated with certain chromosomal positions.
 
 Species-level instrumentation operates via hereditary stratigraphic columns associated with individual genomes.
-Instrumentation consensus within interbreeding populations is achieved through a gene drive mechanism that forces a single consensus differentia value to sweep each hereditary stratigraph layer within interbreeding populations (i.e., species), described in Section \ref{sec:gene-drive}.
+Instrumentation consensus within interbreeding populations is achieved through a gene drive mechanism that forces a single consensus differentia value to sweep each hereditary stratigraph layer within interbreeding populations (i.e., species), described below.
 Although gene drive mechanisms are widespread in natural systems \citep{alphey2020standardizing, price2020resistance}, unlike gene-level annotation this technique has no direct analogy in traditional phylogenetic analyses.
 
-Species instrumentation employed the recombination and gene drive mechanism described in Section \ref{sec:gene-drive}.
-Species hereditary stratigraph instrumentation was employed for the genealogical inference and population size inference experiments.
-Gene instrumentation employed the distributed copy count estimation mechanism described in Section \ref{sec:dist-gene-prevalence-est}.
-Gene hereditary stratigraph instrumentation was employed for the positive selection inference experiment.
-
-\subsubsection{``Gene-drive'' Recombination Mechanism}
-\label{sec:gene-drive}
+Species-level instrumentation was employed for genealogical inference and population size inference (Sections \ref{sec:genealogical-inference} and \ref{sec:population-size-inference}).
+Gene hereditary stratigraph instrumentation was employed for positive selection inference (Section \ref{sec:selection-inference}).
 
 \input{fig/gene-drive.tex}
-
+\textbf{``Gene-drive'' Recombination Mechanism.}
 Successful species-level tracking necessitates consistent labeling of interbreeding population members and consensus among members on phylogenetic history.
 In the hereditary stratigraphic context, this translates to consistency among corresponding-time point fingerprint differentia values among population members.
 Recombination of differentia values between genome instrumentaiton markers will, in the limit, enforce such consensus.
@@ -90,9 +81,7 @@ All reported experiments use synchronous generations.
 The described gene drive-based recombination mechanism described in this section only applied exclusively to species-level instrumentation.
 (Gene-level instruments, although tagging along with genes shuffled up through genome-level recombination, did not themselves recombine.)
 
-\subsubsection{Collision Probability Between Fixed Differentia Genes}
-\label{sec:collision-probability}
-
+\textbf{Fingerprint Collision Probability.}
 Fixed genes' skew toward large-magnitude integers due to the dominance of larger values in gene drive competition increases the probability of fixed-gene collision between two populations causing spurious detection of shared ancestry between the populations.
 This collision probability effect presents a potential threat to the efficacy of this approach at scale.
 We will assess the extent of this potential problem by computing threshold population sizes where collision becomes substantive.

@@ -1,9 +1,9 @@
 \section{Results and Discussion} \label{sec:results}
 
-\subsection{Genealogical Inference}
+This section reports validation experiments for debuted genealogical inference, effective population size inference, and positive selection inference techniques (Sections \ref{sec:genealogical-inference,sec:population-size-inference,sec:selection-inference}).
 
+\textbf{Genealogical Inference}
 \input{fig/species-example-replicates}
-
 Figure \ref{fig:species-example-replicates} compares phylogenetic trees reconstructed from species-level hereditary stratigraph instrumentation to corresponding references extracted from perfectly-tracked sexual pedigrees.
 For treatments with meaningful phylogentic structure --- the ``allopatry'' and ``ring'' treatments --- phylogenetic reconstruction from species-level annotation largely succeeded in recovering membership in structured subpopulations and the historical relationships between subpopulations.
 In fact, for the ``allopatry'' treatment, inner node time points appear to more closely track the true generational time frames of speciation events (at generation 100 and 150) than the UPGMA-based pedigree distillation.
@@ -22,10 +22,8 @@ Performance on the ring and allopatry treatments was stronger, achieving quartet
 Inclusion of nebulous phylogenetic structure within the reference phylogeny (i.e., within well-mixed subpopulations in both ) seems likely to significantly contribute to reconstruction error, obscuring the true magnitude of meaningful reconstruction error due to limitations of the instrumentation-based approach.
 More sophisticated pedigree-to-phylogeny conversion that collapses closely-related subpopulations to single nodes may prove more descriptive.
 
-\subsection{Effective Population Size Inference}
-
+\textbf{Effective Population Size Inference}
 \input{fig/ne-example-replicates}
-
 Figure \ref{fig:ne-example-replicates} compares 10-sample running estimates of population size among one replicate from each surveyed treatment (Section \ref{sec:population-size-inference-experiments}).
 Estimate trajectories from other replicates will be made available in supplemental material
 
@@ -49,10 +47,8 @@ However, under the range expansion treatment, changes to population size from 10
 % fro mpopulation size 66 to 128.
 %  \% over the course of an evolutionary run .
 
-\subsection{Gene Selection Inference}
-
+\textbf{Positive Selection Inference}
 \input{fig/selection-example-replicates}
-
 Gene selection experiments introduced novel alleles with fitness advantages of 1.0 (strong selection), 0.1 (weaker selection), and 0.0 (no selection --- control).
 For each trial, the prevalence trajectory of the introduced allele and corresponding response in the distributed delayed copy count mechanism described in Section \ref{sec:positive-selection-inference-experiment} were recorded.
 Copy count estimates were extracted from the hereditary stratum sequence of the focal gene's instrumentation within a randomly-sampled extant organism at the end of evolutionary runs.

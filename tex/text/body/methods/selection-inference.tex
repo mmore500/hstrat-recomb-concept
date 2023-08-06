@@ -3,11 +3,8 @@
 
 Section \ref{sec:dist-gene-prevalence-est} summarizes the proposed mechanism for gene selection inference and Section \ref{sec:positive-selection-inference-experiment} reports the evolutionary system and experimental treatments used to test it.
 
-\subsubsection{Distributed Gene Prevalence Estimation Mechanism}
-\label{sec:dist-gene-prevalence-est}
-
 \input{fig/copy-count-snapshot.tex}
-
+\textbf{Inference Mechanism.}
 Increases in allele prevalence tend to occur for alleles experiencing positive selection, but can also occur for selectively neutral alleles due to drift effects.
 The key difference between the two is the \textit{rate} of increase within the population --- increases in prevalence due to drift tend to be slower than increases in prevalence due to selective effects, especially for large population sizes.
 
@@ -41,9 +38,7 @@ Soft sweeps should, in principle, be detectable to some extent through this meth
 However, weak sweeps on very-widespread alleles that quickly reach fixation will register only a weak signal on this instrumentation because increases in descendant copy count are spread across the large number of preexisting allele copies.
 Although detectability of weak sweeps are not tested in this work, this issue merits consideration in future work.
 
-\subsubsection{Positive Selection Inference Experiment}
-\label{sec:positive-selection-inference-experiment}
-
+\textbf{Validation Experiment.}
 A minimalistic experimental system was devised to test proposed methodology to detect positive selection on a novel allele.
 We model the introduction of an atomic gene with tunable fitness advantage into an otherwise neutral background.
 

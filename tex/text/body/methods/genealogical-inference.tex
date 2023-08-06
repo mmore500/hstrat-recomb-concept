@@ -1,9 +1,9 @@
 \subsection{Genealogical Inference}
 \label{sec:genealogical-inference}
 
-Sections \ref{sec:allopatry-treatment,sec:ring-treatment,sec:bag-treatment} describe the three treatments compared to test the proposed genealogical inference mechanisms.
-Section \ref{sec:phylogeny-extraction} lays details the procedure used to convert recorded sexual pedigrees to phylogenetic trees that reconstruction quality could be evaluated against.
+This section describe the three treatments compared to test the proposed genealogical inference mechanisms then lays out the procedure used to convert recorded sexual pedigrees to phylogenetic trees that reconstruction quality could be evaluated against.
 
+\textbf{Validation Experiment.}
 This experiment tested the quality of genealogical history recovered from species-level hereditary stratigraph annotation.
 Phylogenetic reconstruction quality was tested over three evolutionary treatments.
 The first, ``allopatry,'' covered full speciation through introduction of a strict reproductive barrier among subpopulations.
@@ -21,9 +21,7 @@ Disagreement between reconstruction and reference was quantified using the quart
 
 Additionally, inferred phylogenies were visualized to confirm whether reconstructions recovered the major features of treatments' evolutionary histories.
 
-\subsubsection{Allopatry Treatment}
-\label{sec:allopatry-treatment}
-
+\textit{Allopatry Treatment.}
 This treatment simulates 100 generations of well-mixed sympatric evolution.
 At generation 100, the population is divided into two 50-member subpopulations.
 These subpopulations evolve independently with no migration for 50 generations.
@@ -31,21 +29,15 @@ Then, at generation 150, the first subpopulation is split again into five 10-mem
 The remaining 50-member subpopulation and the five new 10-member subpopulations then evolve independently with no migration for a further 50 generations.
 Phylogenetic reconstruction from this treatment should ideally recover a binary branching at generation 100 followed by a secondary quintuple-branching along one lineage at generation 150.
 
-\subsubsection{Ring Treatment}
-\label{sec:ring-treatment}
-
+\textit{Ring Treatment.}
 This treatment splits the population into ten distinct subpopulations (islands), each of which evolved independently.
 The subpopulations were arranged in a ring topology, and one individual migrated between adjacent populations per generation happens once per generation.
 
-\subsubsection{Bag Treatment}
-\label{sec:bag-treatment}
-
+\textit{Bag Treatment.}
 This treatment selects and recombines individuals uniformly from across the entire population.
 As such, all individuals extant at simulation completion are closely related so no meaningful phylogenetic structure exists to be detected.
 
-\subsubsection{Phylogeny Extraction from Pedigree Records}
-\label{sec:phylogeny-extraction}
-
+\textbf{Phylogeny Extraction from Pedigree Records.}
 In order to provide a baseline reference to evaluate annotation-based phylogenetic reconstructions against, phylogenetic relationships between extant organisms (i.e., an asexual tree describing ``relatedness'') were extracted from sexual pedigrees (i.e., a reticulated directed acyclic graph describing ancestry).
 
 Such conversion has fundamental limitations: in well-mixed populations of modest size, structured differences in phylogenetic relatedness do not meaningfully exist.
