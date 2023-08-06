@@ -2,8 +2,8 @@
 
 This section reports validation experiments for debuted genealogical inference, effective population size inference, and positive selection inference techniques (Sections \ref{sec:genealogical-inference,sec:population-size-inference,sec:selection-inference}).
 
-\textbf{Genealogical Inference}
 \input{fig/species-example-replicates}
+\textbf{Genealogical Inference.}
 Figure \ref{fig:species-example-replicates} compares phylogenetic trees reconstructed from species-level hereditary stratigraph instrumentation to corresponding references extracted from perfectly-tracked sexual pedigrees.
 For treatments with meaningful phylogentic structure --- the ``allopatry'' and ``ring'' treatments --- phylogenetic reconstruction from species-level annotation largely succeeded in recovering membership in structured subpopulations and the historical relationships between subpopulations.
 In fact, for the ``allopatry'' treatment, inner node time points appear to more closely track the true generational time frames of speciation events (at generation 100 and 150) than the UPGMA-based pedigree distillation.
@@ -13,7 +13,6 @@ Reconstruction/reference comparisons for other replicates will be provided in su
 \input{fig/species-reconstruction-error}
 
 Figure \ref{fig:species-reconstruction-error} shows distributions of reconstruction error for each treatment.
-
 Across all three treatments, all ten replicate reconstructions exhibited quartet distance from reference was strictly less than 0.66, the expected quartet distance between random trees \citep{smith2020information}.
 This provides strong evidence that some successful phylogenetic inference occurred in all three cases (exact binomial test, $p < 0.01$).
 
@@ -22,8 +21,8 @@ Performance on the ring and allopatry treatments was stronger, achieving quartet
 Inclusion of nebulous phylogenetic structure within the reference phylogeny (i.e., within well-mixed subpopulations in both ) seems likely to significantly contribute to reconstruction error, obscuring the true magnitude of meaningful reconstruction error due to limitations of the instrumentation-based approach.
 More sophisticated pedigree-to-phylogeny conversion that collapses closely-related subpopulations to single nodes may prove more descriptive.
 
-\textbf{Effective Population Size Inference}
 \input{fig/ne-example-replicates}
+\textbf{Effective Population Size Inference.}
 Figure \ref{fig:ne-example-replicates} compares 10-sample running estimates of population size among one replicate from each surveyed treatment (Section \ref{sec:population-size-inference-experiments}).
 Estimate trajectories from other replicates will be made available in supplemental material
 
@@ -38,7 +37,6 @@ For the bottleneck and selection pressure treatments, which involve reversion to
 \input{fig/ne-detection-matrix}
 
 Figure \ref{fig:ne-detection-matrix} summarizes the detectability of underling $N_e$ changes.
-
 Detection was performed using MLE confidnece interval comparison between rolling population size estimates at different time points and Mann-Whitney comparison of one-off population size estimate sets at different time points.
 
 No false positives differences in effective population size are detected within the control treatment or same-timepoint comparisons within any treatment.
