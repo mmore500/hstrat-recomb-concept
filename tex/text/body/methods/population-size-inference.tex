@@ -9,12 +9,11 @@ At the outset, each gene value is assumed to be drawn from a uniform distributio
 As generations evolve through sexual recombination, a ``gene drive'' mechanism is enforced where offspring inherit the larger gene value from their parents.
 Over time, this mechanism results in the largest gene value becoming dominant or `fixed' in the population.
 
-\input{fig/beta-explain.tex}
-
 An interesting property of this gene drive mechanism is the potential to estimate the original population size by observing the distribution of the fixed gene values.
 By introducing a random variable $\mathbb{X}$ to represent the magnitude of the fixed gene value, we can explore its distribution.
 Assuming our gene value is uniformly distributed between 0 and 1, it is identified as $\beta(n, 1)$ \citep{gentle2009computational} distributed.
-Hence, by observing the values of these fixed genes, it's possible to infer $n$, the original population size (Figure \ref{fig:beta-explain}).
+Hence, by observing the values of these fixed genes, it's possible to infer $n$, the original population size.
+Supplemental Figure \ref{fig:beta-explain} illustrates this principle.
 This approach is further extendable to cases involving multiple independent genes, each adhering to the same fixed precision and initial uniform distribution, providing a compelling estimation technique for population size.
 
 Directly analogous techniques to estimate population size have also arisen in the context of decentralized, anonymous network engineering \citep{varagnolo2010distributed,hakan2012distributed}.
@@ -96,9 +95,8 @@ Credibility intervals require similar sample sizes to provide $n$-fold magnitude
 Experiments reported here use a simple rolling process to aggregate ten preceding fixed-gene magnitudes to compute a population size estimate and confidence intervals.
 More sophisticated regularizations have been proposed to consolidate time series estimates of dynamically-changing network sizes \citep{hakan2012distributed}.
 
-\input{fig/ne-process-example}
 \textbf{Population Size Inference Example.}
-Figure \ref{fig:ne-process-example} shows an example of population size inference over the course of an experiment.
+Supplemental Figure \ref{fig:ne-process-example} shows an example of population size inference over the course of an experiment.
 
 Panel \ref{fig:ne-process-example:differentia} shows magnitudes of fixed differentia across the generational record extracted from a sample specimen at the end of the run.
 
@@ -107,7 +105,7 @@ The true population size is annotated as a horizontal blue line.
 
 To generate more robust inference, inference was pooled over rolling sets of 10 fixed differentia.
 Population size estimates were again performed using Equation \ref{eqn:popsize_mle} with confidence interval bounds computed via Equation \ref{eqn:popsize_mle_ci}.
-Figure \ref{fig:ne-process-example:running-est} plots this running estimation.
+Supplemental Figure \ref{fig:ne-process-example:running-est} plots this running estimation.
 Note that some discrepancy is expected between absolute population size (horizontal line) and effective population size $N_e$ (estimated) due to demographic factors.
 
 \textbf{Validation Experiment.}
