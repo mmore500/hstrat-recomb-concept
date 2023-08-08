@@ -1,46 +1,46 @@
 \section{Introduction} \label{sec:introduction}
 
-The structure of hereditary relatedness with an evolved population captures substantial aspects of its evolutionary history \citep{dolson2019modes}.
-In the context of evolutionary computation (EC), such phylogenetic information can be diagnostic of systems' runtime dynamics and can afford useful guidance to the benefit of EC algorithm selection, tuning, and development.
-In fact, some work has even gone so far as to apply phylogenetic information to mediate recombination \citep{stanley2002evolving}, fitness estimation \citep{lalejini2023phylogeny}, and diversity maintenance schemes \citep{burke2003increased,murphy2008simple}.
+The structure of hereditary relatedness within an evolved population captures substantial aspects of its evolutionary history \citep{dolson2019modes}.
+In the context of evolutionary computation (EC), such phylogenetic information can be diagnostic of systems' runtime dynamics and thereby guide EC algorithm selection, tuning, and development.
+Some work has even gone so far as to apply phylogenetic information to mediate recombination \citep{stanley2002evolving}, fitness estimation \citep{lalejini2023phylogeny}, and diversity maintenance schemes \citep{burke2003increased,murphy2008simple}.
 
-Burgeoning parallel and distributed computing power promises to continue advancing the capabilities of evolutionary computation.
-Bigger population sizes, more sophisticated genetic representations, and more robust fitness evaluation will come into reach.
+Growth in parallel and distributed computing power benefits EC capability.
+Bigger population sizes, more sophisticated genetic representations, and more robust fitness evaluation will continue to come into reach.
 Very large scale operation, however, will require renovation of methodologies poorly suited to parallel and distributed computing.
-Approaches relying on centralized control and total visibility, in particular, are expected to become increasingly inefficient and brittle.
+Approaches relying on centralized control and complete system visibility, in particular, are expected to become increasingly inefficient and brittle.
 
-Phylogenetic tracking in digital evolution systems, in particular, has traditionally been accomplished in a centralized manner.
+Phylogenetic work in digital evolution systems, in particular, has traditionally been accomplished through centralized tracking.
 Collecting and stitching together all parent-offspring relationships yields a perfect phylogenetic record.
-Even at the scale of a single processor, an entirely comprehensive record quickly becomes unwieldy.
-Fortunately, in asexual systems where offspring have exactly one parent, the extant population's lineages comprise only a miniscule fraction of all ancestors.
-Pruning away extinct lineages, therefore, typically sufficiently tempers memory use --- even for long-lasting runs with large population sizes.
-Sexual lineages (i.e., with multiple properties per offspring) do not exhibit this winnowing property.
+Even at the scale of a single processor, storing an entirely comprehensive phylogenetic record quickly becomes unwieldy.
+Fortunately, in asexual systems (where offspring have exactly one parent) extant lineages comprise only a miniscule fraction of all ancestors.
+So, pruning away extinct lineages greatly tempers memory use --- even for long-lasting runs with large population sizes.
+Sexual lineages (i.e., multiple parents per offspring) do not exhibit this lineage winnowing property.
 As such, application of the perfect tracking model becomes more challenging, although not entirely unheard of \citep{mcphee2018detailed,mcphee2016using,burlacu2013visualization}.
-The APOGeT tool is notable in this regard.
-It applies a user-defined interbreeding compatibility measure to cluster together ``species'' on the fly, making use of the global visibility afforted in centralized evolution simulation to distill tractable summary data \citep{godin2019apoget}.
+The APOGeT tool is notable in this domain.
+It applies a user-defined interbreeding compatibility measure to cluster together ``species'' on the fly, making use of the global system visibility to distill tractable summary data \citep{godin2019apoget}.
 
-With complete central observability, extinction can be detected through reference counting --- making it fast and easy.
-Introducing a distributed computing model, where lineages wind across networks of independent nodes, however, greatly complicates matters.
-Now extinction notifications would have to wind back over the lineages' node-to-node migrations.
-Data loss, whether due to hardware failures, dropped messages, or some other imbroglio, exacerbates matters further still.
-Any eliminated extinction notification would entrench remnant records from the zombie lineage.
+Unter tracking, extinction is fast and easy to detect through reference counting.
+Introducing a distributed computing model where lineages wind across networks of independent nodes, however, greatly complicates matters.
+Extinction notifications would have to wind back over all of lineages' node-to-node migrations.
+Data loss --- whether due to hardware failures, dropped messages, or some other issue --- exacerbates matters further still.
+Any lost extinction notification would entrench ancestors' records leaving a kind of zombie lineage.
 More worrisome, though, data loss could entirely disjoin components of the phylogenetic record, introducing profound uncertainty as to how large components relate.
-At very large scales, such concerns are expected to become near inevitabilities \citep{gropp2013programming}.
+Unfortunately, at very large scales, hardware failures are expected to become near inevitabilities \citep{gropp2013programming}.
 
 Although not traditionally performed in EC, phylogenetic analysis is possible without direct tracking.
-In fact, this is the \textit{de facto} paradigm within biological science, where phylogenetic relationships are largely inferred through comparisons among extant traits.
-Historically, this was on the basis of phenotypic characteristics, but as it became available genetic sequence data has become increasingly prevalent --- and powerful.
-Unfortunately, phylogenetic reconstruction is notoriously difficult, demanding vast quantities of data, software, and computation --- not to mention enough mathematical and algorithmic development as to become as to precipitate an entire field of study.
+In fact, this is the \textit{de facto} paradigm within biological science, where phylogenetic relationships are largely inferred through comparisons of extant traits.
+As it has become available, genetic sequence data has gained increasing prevalence as the basis for phylogenetic analysis.
+Unfortunately, phylogenetic reconstruction is notoriously difficult, demanding vast quantities of data, software, and computation --- not to mention sufficient statistical and algorithmic efforts to precipitate an entire field of study.
 Fortunately, EC can largely sidestep this plight.
 
-The malleability of the digital substrate invites explicit design of genetic components that facilitate straightforward phylogenetic inference from small amounts of data with minimal computational overhead.
+Malleability of the digital substrate invites explicit design of genetic components in order to facilitate straightforward phylogenetic inference from small amounts of data with minimal computational overhead.
 This desideratum motivated recent development of ``hereditary stratigraphy,'' a design for digital genetic material expeditious to phylogenetic inference \citep{moreno2022hereditary}.
 Existing work with hereditary stratigraphy has restricted exclusively to asexual lineages (i.e., exactly one parent per offspring).
 Given the essential role of sexual recombination operations (i.e., crossover) in EC, effort to address this limitation is of key significance.
 
 This work introduces techniques to apply hereditary stratigraphy methods to sexual lineages.
 Developed methods enable decentralized inference of (1) genealogical history, (2) population size fluctuations, and (3) selective sweeps.
-Such capabilities can enhance diagnostic telemetry facilitative to application-oriented EC.
-Digital evolution-based experiments in evolutionary research that incorporate sexual dynamics may also see applications of phylogenetic information to enhance scientific observability.
-In both cases, the proposed genome-annotation-based approach affords scalability to distributed evolutionary models not previously possible.
-Given the difficulties in managing the growth of sexual pedigree records, some aspects may prove useful even in the absence of multiprocessing, complementarily to existing methodologies.
+Such capabilities can enhance diagnostic telemetry that benefits application-oriented EC.
+Digital model systems for evolution research involving sexual dynamics may also benefit from enhanced observability.
+In both cases, the proposed approach affords greater scalability than previously possible.
+Given the difficulties in managing memory usage of sexual pedigree records, reconstruction-based analysis may even prove useful in the absence of multiprocessing.

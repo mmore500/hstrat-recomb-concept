@@ -1,49 +1,51 @@
 \section{Results and Discussion} \label{sec:results}
 
-This section reports validation experiments for debuted genealogical, effective population size, and positive selection inference techniques (Sections \ref{sec:genealogical-inference}, \ref{sec:population-size-inference}. and \ref{sec:selection-inference}).
+This section reports validation experiments for debuted genealogical, population size, and positive selection inference techniques.
+Results support their efficacy.
 
 \subsection{Genealogical Inference}
 \input{fig/species-example-replicates}
+\input{fig/species-reconstruction-error}
 
 Figure \ref{fig:species-example-replicates} compares phylogenetic trees reconstructed from species-level instrumentation to corresponding references extracted from perfectly-tracked sexual pedigrees.
 For treatments with meaningful phylogentic structure --- the ``allopatry'' and ``ring'' treatments --- phylogenetic reconstruction largely succeeded in recovering the historical relationships between subpopulations.
 In fact, for the ``allopatry'' treatment, inner node time points appear to more closely track the true generational time frames of speciation events (at generation 100 and 150) than the UPGMA-based pedigree distillation.
 
-Supplemental Figure \ref{fig:species-reconstruction-error} shows distributions of reconstruction error for each treatment.
-Across all three treatments, all ten replicate reconstructions exhibited quartet distance from reference strictly fell below 0.66, the expected for comparison of random trees \citep{smith2020information}.
-So, significant phylogenetic information was recovered in all three cases (exact binomial test, $p < 0.01$).
+Figure \ref{fig:species-reconstruction-error} shows distributions of reconstruction error for each treatment.
+Across the three treatments, all ten replicate reconstructions yielded quartet distance from reference below 0.66 (the null expectation for arbitrary trees) \citep{smith2020information}.
+This confirms recovery ofphylogenetic information in all three cases (exact binomial test, $p < 0.01$).
 
 However, as expected, reconstruction quality on the bag population structure was marginal due to the lack of meaningful phylogenetic information available to reconstruct.
 Performance on the ring and allopatry treatments was stronger, achieving quartet distances between reconstruction and reference of around 0.3 in the typical case.
-However, inclusion of nebulous phylogenetic structure within the reference phylogeny obscures the true magnitude of meaningful reconstruction error.
+However, junk phylogenetic structure within the reference phylogeny obscures the amount of meaningful reconstruction error.
 
-\subsection{Population Size Inference.}
-Supplemental Figure \ref{fig:ne-example-replicates} shows ten-sample rolling estimates of population size for one replicate from each surveyed treatment.
-All effective population estimates respond to underlying demographic changes, although the response to selection pressure relaxation appears weaker than responses to changes in population size.
-Substantial estimate volatility appears across all cases.
-
+\subsection{Population Size Inference}
 \input{fig/ne-estimate-distributions}
 
-Figure \ref{fig:ne-estimate-distributions} summarizes the distribution of effective population size estimates across replicates at three time points spread across the beginning, middle, and end of evolutionary runs.
-Estimates differ across time points within all non-control treatments, more rigorously confirming estimator sensitivity.
+Figure \ref{fig:ne-estimate-distributions} summarizes the distribution of effective population size estimates across replicates at the beginning, middle, and end of evolutionary runs.
+Evidencing detection sensitivity, estimates differ across time points within all non-control treatments.
 For the bottleneck and selection pressure treatments, which involve reversion to initial conditions, estimate distributions at the first and last time points are comparable, as expected.
 
-Supplemental Figure \ref{fig:ne-detection-matrix} summarizes the detectability of underling $N_e$ changes.
-Detection was performed using MLE confidnece interval comparison between rolling population size estimates at different time points
-No false positives differences in effective population size are detected.
-Most true changes in effective population size are detected in at least nine out of ten replicates, except for the selection pressure treatment and for one segment of the range expansion treatment.
-Supplemental Figure \ref{fig:ne-detection-matrix} also shows Mann-Whitney comparison of population size estimates using a larger sample size of 30 observations, which was more consistently sensitive.
+Supplemental Figure \ref{fig:ne-example-replicates} shows ten-sample rolling estimates of population size for one replicate from each surveyed treatment.
+All population estimates respond to underlying demographic changes, although the response to selection pressure relaxation appears weaker than responses to changes in population size.
+Substantial estimate volatility appears across all cases.
+
+Supplemental Figure \ref{fig:ne-detection-matrix} summarizes the detectability of underling effective population size changes.
+Detection was performed by evaluating 95\% confidence interval overlap between rolling population size estimates at different time points
+No false positives were detected.
+Most true changes in effective population size were detected in at least nine out of ten replicates, except for the selection pressure treatment and for the last segment of the range expansion treatment.
 
 \subsection{Positive Selection Inference}
 \input{fig/selection-example-replicates}
-Gene selection experiments introduced novel alleles with fitness advantages of 1.0 (strong selection), 0.1 (weaker selection), and 0.0 (no selection --- control).
-Figure \ref{fig:selection-example-replicates} jointly plots underlying gene copy count and delayed copy count estimates extracted from a randomly-sampled population member.
-For the strong selection treatment, allele frequency fixes rapidly and induces a sharp spike in the delayed copy count.
-For the weaker selection treatment, allele frequency grows somewhat less rapidly.
-A delayed copy count spike is apparent, but of smaller magnitude and --- corresponding to variation in underlying sweep timing --- occuring with variable delay.
+Gene selection experiments introduced novel alleles with fitness advantages of 1.0 (strong selection), 0.1 (weaker selection), or 0.0 (no selection --- control).
+Figure \ref{fig:selection-example-replicates} plots underlying gene copy count with instrument delayed copy count estimates.
+These bit counts were extracted from a single randomly-sampled population member.
+For the strong selection treatment, allele frequency fixes rapidly and induces a sharp spike in the instrument values.
+For the weaker selection treatment, allele frequency grows somewhat less rapidly and is sometimes delayed.
+An instrument bit count spike is apparent, but of smaller magnitude and occuring with more variable timing.
 
-The sensitivity and specificity of positive gene selection detection was evaluated in terms of false-positive (i.e., detection selection on control replicates) and false-negative rates (i.e., non-detection of selection on fitness-advantaged replicates) across a range of detection threshold values.
-Supplemental Figure \ref{fig:selection-sensitivity-specificity} plots detectoun outcomes across a range of threshold values.
+The sensitivity and specificity of positive gene selection detection was evaluated by surveying false-positive (i.e., detection selection on control replicates) and false-negative rates (i.e., non-detection of selection on fitness-advantaged replicates) across a range of detection threshold values.
+Supplemental Figure \ref{fig:selection-sensitivity-specificity} plots detectoun outcomes across a range of detection thresholds.
 Strong selection events can be unambiguously distinguished from neutral events, as well as from weaker selection events.
 Weaker selection and neutral events were not entirely separable.
-Setting the detection threshold at sum count 200 misidentified one neutral event and one weak positive event --- corresponding to a 10\% false-positive and 10\% false-negative rate.
+The middle=of-the-road detection threshold misidentified one neutral event and one weak positive event --- corresponding to a 10\% false-positive and 10\% false-negative rate.
