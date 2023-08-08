@@ -13,7 +13,7 @@ In fact, for the ``allopatry'' treatment, inner node time points appear to more 
 
 Figure \ref{fig:species-reconstruction-error} shows distributions of reconstruction error for each treatment.
 Across the three treatments, all ten replicate reconstructions yielded quartet distance from reference below 0.66 (the null expectation for arbitrary trees) \citep{smith2020information}.
-This confirms recovery ofphylogenetic information in all three cases (exact binomial test, $p < 0.01$).
+This confirms recovery of phylogenetic information in all three cases (exact binomial test, $p < 0.01$).
 
 However, as expected, reconstruction quality on the bag population structure was marginal due to the lack of meaningful phylogenetic information available to reconstruct.
 Performance on the ring and allopatry treatments was stronger, achieving quartet distances between reconstruction and reference of around 0.3 in the typical case.
@@ -38,14 +38,14 @@ Most true changes in effective population size were detected in at least nine ou
 \subsection{Positive Selection Inference}
 \input{fig/selection-example-replicates}
 Gene selection experiments introduced novel alleles with fitness advantages of 1.0 (strong selection), 0.1 (weaker selection), or 0.0 (no selection --- control).
-Figure \ref{fig:selection-example-replicates} plots underlying gene copy count with instrument delayed copy count estimates.
+Figure \ref{fig:selection-example-replicates} plots underlying gene copy count with instrument delay copy count estimates.
 These bit counts were extracted from a single randomly-sampled population member.
 For the strong selection treatment, allele frequency fixes rapidly and induces a sharp spike in the instrument values.
 For the weaker selection treatment, allele frequency grows somewhat less rapidly and is sometimes delayed.
-An instrument bit count spike is apparent, but of smaller magnitude and occuring with more variable timing.
+An instrument bit count spike is apparent, but it occurs with a smaller magnitude and more variable timing.
 
 The sensitivity and specificity of positive gene selection detection was evaluated by surveying false-positive (i.e., detection selection on control replicates) and false-negative rates (i.e., non-detection of selection on fitness-advantaged replicates) across a range of detection threshold values.
-Supplemental Figure \ref{fig:selection-sensitivity-specificity} plots detectoun outcomes across a range of detection thresholds.
+Supplemental Figure \ref{fig:selection-sensitivity-specificity} plots detection outcomes across a range of detection thresholds.
 Strong selection events can be unambiguously distinguished from neutral events, as well as from weaker selection events.
 Weaker selection and neutral events were not entirely separable.
-The middle=of-the-road detection threshold misidentified one neutral event and one weak positive event --- corresponding to a 10\% false-positive and 10\% false-negative rate.
+The middle-of-the-road detection threshold misidentified one neutral event and one weak positive event --- corresponding to a 10\% false-positive and 10\% false-negative rate.

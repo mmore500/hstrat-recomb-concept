@@ -13,7 +13,7 @@ The core mechanism of this technique is generation-on-generation accumulation of
 Offspring inherit parents' fingerprints and append a new entry.
 This process repeats with the next generation.
 
-Each accumulated fingerprint ultimately serves as a kind of linealogical checkpoint.
+Each accumulated fingerprint ultimately serves as a kind of lineage checkpoint.
 Because fingerprints are faithfully inherited each generation after their creation, discrepancy between coincident fingerprints held by two population members implies divergent ancestry at their shared time point.
 So, last common ancestry necessarily precedes the first mismatching fingerprints.
 Fingerprint values convey no function phenotypic information.
@@ -35,8 +35,8 @@ Further work remains to directly investigate how pruning affects presented appro
 Analogous work in asexual populations should provide some initial indications in this direction \citep{moreno2023toward}.
 
 This work uses 64 bit fingerprints, which collide spuriously with negligible probability $2^{-64} \approx 5 \times 10^{-20}$.
-At population size 100 over 200 generations, as in the first sets of reported experiments, the probability of any collision is miniscule: $< 2 \times 10^{-15}$.
-At population size 200 over 400 generations, as in the last set of reported experiments, the probability of any collision is also miniscule: $< 5 \times 10^{-15}$.
+At population size 100 over 200 generations, as in the first sets of reported experiments, the probability of any collision is minuscule: $< 2 \times 10^{-15}$.
+At population size 200 over 400 generations, as in the last set of reported experiments, the probability of any collision is also minuscule: $< 5 \times 10^{-15}$.
 
 \input{fig/annotation-types.tex}
 \textbf{Sexual Instrumentation Schemes.}
@@ -45,7 +45,7 @@ Here, we explore two alternate schemes designed for instrumentation of sexual po
 Figure \ref{fig:annotation-types} compares these two schemes.
 
 Gene-level instrumentation views individual genes simply as asexual atoms, and instruments them individually.
-Reconstructions, therefore, operate along the lines of ``gene tree'' analsyes in traditional phylogenetics \citep{avise1989gene}.
+Reconstructions, therefore, operate along the lines of ``gene tree'' analyses in traditional phylogenetics \citep{avise1989gene}.
 In some cases, it may make sense to instrument every gene independently.
 Other applications may warrant instrumenting only a subset of genes or introducing instrumented ``dummy'' genes.
 
@@ -59,7 +59,7 @@ Gene hereditary stratigraph instrumentation powers positive selection inference 
 \textbf{``Gene-drive'' Recombination Mechanism.}
 Species-level tracking relies on consensus among fingerprint values within reproductively isolated subpopulations.
 Drift will ultimately yield consensus, but expected coalescence times can be long for large populations
-A simple inheritance rule reaches consensus faster: inherit the larger of parents' fingerpint values.
+A simple inheritance rule reaches consensus faster: inherit the larger of parents' fingerprint values.
 Global maximum fingerprint values will spread rapidly and fix.
 Figure \ref{fig:gene-drive} depicts this mechanism.
 
@@ -75,7 +75,7 @@ The gene-drive-based recombination mechanism described in this section applied e
 
 \textbf{Fingerprint Collision Probability.}
 Under gene-drive recombination, fixed fingerprints skew large due to the gene drive criterion.
-This skew increases the probability of fingerprint collision between two populations which would cause spurious detection of shared ancestry.
+This skew increases the probability of fingerprint collision between two populations, which would cause spurious detection of shared ancestry.
 We will assess the extent of this issue by computing threshold population sizes where collision probability becomes substantive.
 
 Suppose independent populations of size $a$ and $b$.
@@ -90,7 +90,7 @@ If each population members' gene is drawn from uniform distribution on integers 
 \end{scriptsize}
 % Derivation will be provided in supplementary materials. TODO?
 
-For 32-bit differentia $u = 2^{32}$, collision occurs with $p < 0.5$ ($p = 0.46$) for populations of size $a = b = 2^{32}$.
+For 32-bit fingerprints $u = 2^{32}$, collision occurs with $p < 0.5$ ($p = 0.46$) for populations of size $a = b = 2^{32}$.
 Collision occurs with $p < 0.01$ for populations of size $a = b = 2^{26}$.
 So, 32-bit fingerprints can differentiate species pairs of around $6.7 \times 10^{7}$ members each with reasonable consistency.%
 \footnote{

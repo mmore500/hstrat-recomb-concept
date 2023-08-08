@@ -19,11 +19,11 @@ Each fingerprint is bundled with a fixed-length, zero-initialized bit field.
 These bit fields are copied verbatim to descendants along with the rest of gene annotations.
 
 At the $g$th generation following its creation, a single bit is set at random in each bit field.
-Duing subsequent recombination, corresponding bit fields with matching fingerprints combine using the bitwise or operation.
+During subsequent recombination, corresponding bit fields with matching fingerprints combine using the bitwise or operation.
 In this manner, set bits propagate among the records that trace back to a particular founder gene at the snapshot window outset.
 Annotations' bit counts converge to reflect the number of gene copies present after generational delay $g$.
-Figure \ref{fig:copy-count-snapshot} summarizes the overall mechaniism.
-Set bits can undercount snapshot gene copies due to positional overlap between set bits or gene copy extinctions subsequent to generation $g$.
+Figure \ref{fig:copy-count-snapshot} summarizes the overall mechanism.
+Set bits can undercount snapshot gene copies due to bit position overlap or gene copy extinctions subsequent to generation $g$.
 Sensitivity to larger copy counts could be achieved by setting bits instead with probability $p < 1$.
 
 A bit field width of 8 bytes and a snapshot delay of 16 generations, by arbitrary choice, were used in experiments.
