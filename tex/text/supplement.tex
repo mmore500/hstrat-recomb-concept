@@ -1,8 +1,42 @@
 \section{Supplemental Material}
 
-\input{fig/beta-explain.tex}
+\subsection{One-Max Task}
+\label{sec:one-max}
+
+We used the one-max task for population size and genealogical inference experiments.
+This task selects over binary string of length 100 for the number of 1's set.
+Fitness preferred individuals with more 1's over individuals with fewer.
+Population size was 200, initialized randomly.
+In treatments where population size decreased during an evolutionary run, excess individuals were designated for elimination randomly.
+In treatments where population size increased during an evolutionary run,
+new population slots were filled through selection over the existing population.
+
+Selection was performed using tournament selection with synchronous generations.
+Default tournament size was 2.
+Evolutionary runs lasted 100 generations.
+Two-point crossover (mating) and bit-flip mutation with per-bit probability 0.05 each generation prior to selection.
+Operator choice and parameter selections follows one-max example code from the DEAP package \citep{fortin2012deap}.
+
+\subsection{Population Size Inference Example}
+\label{sec:population-size-inference-example}
 
 \input{fig/ne-process-example}
+
+Panel \ref{fig:ne-process-example:differentia} shows magnitudes of fixed differentia across the generational record extracted from a sample specimen at the end of the run.
+
+Population size estimates can be computed at each generation using the maximum likelihood estimator (given in Equation \ref{eqn:popsize_mle}), as shown in Panel \ref{fig:ne-process-example:singleton-est}.
+The true population size is annotated as a horizontal blue line.
+
+To generate more robust inference, inference was pooled over rolling sets of 10 fixed differentia.
+Population size estimates were again performed using the maximum likelihood estimator given in Equation \ref{eqn:popsize_mle} with confidence interval bounds computed via Equation \ref{eqn:popsize_mle_ci}.
+Supplemental Figure \ref{fig:ne-process-example:running-est} plots this running estimation.
+Note that some discrepancy is expected between absolute population size (horizontal line) and effective population size $N_e$ (estimated) due to demographic factors.
+
+
+
+\subsection{Supplementary Figures}
+
+\input{fig/beta-explain.tex}
 
 \input{fig/species-reconstruction-error}
 

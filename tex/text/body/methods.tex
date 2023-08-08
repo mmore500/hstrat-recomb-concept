@@ -9,31 +9,10 @@ Three inferential techniques are introduced:
 \end{enumerate}
 
 The first two rely on ``species-level'' annotation.
-Section \ref{sec:one-max} introduces the simple ``one-max'' problem used for validation experiments of genealogical and population size inference.
 The third, selection inference, applies ``gene-level'' instrumentation.
-Section \ref{sec:software-data} closes with information on software and data associated with this work.
+Section \ref{sec:software-data} closes with information on software implementation and supplementary materials.
 
 \input{text/body/methods/genome-instrumentation.tex}
-
-\subsection{One-Max Task}
-\label{sec:one-max}
-
-We used the one-max task for experiments to evaluate population size inference and genealogical inference.
-This tasks selects over fixed-length bit string individuals for the fraction of 1's set.
-Each individual was represented as a binary string of length 100.
-Fitness was evaluated as the sum of the bits in the binary string, preferring individuals with more 1s over individuals with fewer.
-Population size was 200 individuals, initialized randomly with sites set to 1 with probability 0.5.
-In treatments where population size decreased during an evolutionary run, excess individuals were eliminated randomly.
-In treatments where population size increased during an evolutionary run,
-new population slots were filled through selection over the existing population.
-
-Selection was performed using the tournament selection method.
-Default tournament size was 2.
-Tournament sizes 1 and 8 were also set in certain treatments.
-Tournaments were performed synchronously, with all parents selected before turnover of the entire population.
-Evolutionary runs lasted 100 generations.
-Two-point crossover (mating) and bit-flip mutation with per-bit probability 0.05 were applied to all organisms at all generations prior to selection.
-Operator choice and parameter selections were based on one-max example code from the Distributed Evolutionary Algorithms in Python package \citep{fortin2012deap}.
 
 \input{text/body/methods/genealogical-inference.tex}
 
