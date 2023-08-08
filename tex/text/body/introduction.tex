@@ -16,13 +16,15 @@ Fortunately, in asexual systems where offspring have exactly one parent, the ext
 Pruning away extinct lineages, therefore, typically sufficiently tempers memory use --- even for long-lasting runs with large population sizes.
 Sexual lineages (i.e., with multiple properties per offspring) do not exhibit this winnowing property.
 As such, application of the perfect tracking model becomes more challenging, although not entirely unheard of \citep{mcphee2018detailed,mcphee2016using,burlacu2013visualization}.
+The APOGeT tool is notable in this regard.
+It applies a user-defined interbreeding compatibility measure to cluster together ``species'' on the fly, making use of the global visibility afforted in centralized evolution simulation to distill tractable summary data \citep{godin2019apoget}.
 
 With complete central observability, extinction can be detected through reference counting --- making it fast and easy.
 Introducing a distributed computing model, where lineages wind across networks of independent nodes, however, greatly complicates matters.
 Now extinction notifications would have to wind back over the lineages' node-to-node migrations.
 Data loss, whether due to hardware failures, dropped messages, or some other imbroglio, exacerbates matters further still.
 Any eliminated extinction notification would entrench remnant records from the zombie lineage.
-More worrisome, though, data loss could entirely disjoin components of the phylogenetic record, introducing profound uncertainty as to how large compo relate.
+More worrisome, though, data loss could entirely disjoin components of the phylogenetic record, introducing profound uncertainty as to how large components relate.
 At very large scales, such concerns are expected to become near inevitabilities \citep{gropp2013programming}.
 
 Although not traditionally performed in EC, phylogenetic analysis is possible without direct tracking.
@@ -38,6 +40,7 @@ Given the essential role of sexual recombination operations (i.e., crossover) in
 
 This work introduces techniques to apply hereditary stratigraphy methods to sexual lineages.
 Developed methods enable decentralized inference of (1) genealogical history, (2) population size fluctuations, and (3) selective sweeps.
-Such capabilities can enhance diagnostic telemetry, facilitative to application-oriented EC.
-Given the difficulties in managing the growth of sexual pedigree records, some aspects may prove useful even in the absence of multiprocessing.
+Such capabilities can enhance diagnostic telemetry facilitative to application-oriented EC.
 Digital evolution-based experiments in evolutionary research that incorporate sexual dynamics may also see applications of phylogenetic information to enhance scientific observability.
+In both cases, the proposed genome-annotation-based approach affords scalability to distributed evolutionary models not previously possible.
+Given the difficulties in managing the growth of sexual pedigree records, some aspects may prove useful even in the absence of multiprocessing, complementarily to existing methodologies.

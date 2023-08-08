@@ -1,20 +1,13 @@
 \subsection{Population Size Inference}
 \label{sec:population-size-inference}
 
-This section introduces the mechanistic principle behind distributed population size estimation, reports statistical formulations derived to perform distributed population size estimation, illustrates an example of inference scenario, then describes the three treatments compared to test the proposed population size inference mechanism.
+This section introduces the mechanistic principle behind distributed population size estimation, reports statistical formulations derived to perform distributed population size estimation, illustrates an example of inference scenario, then describe sexperiments to test the proposed inference technique.
 
 \textbf{Inference Principle.}
-Consider a population composed of $n$ individuals, each holding a unique gene represented as an unsigned integer of a given precision.
-At the outset, each gene value is assumed to be drawn from a uniform distribution across all possible values.
-As generations evolve through sexual recombination, a ``gene drive'' mechanism is enforced where offspring inherit the larger gene value from their parents.
-Over time, this mechanism results in the largest gene value becoming dominant or `fixed' in the population.
-
-An interesting property of this gene drive mechanism is the potential to estimate the original population size by observing the distribution of the fixed gene values.
-By introducing a random variable $\mathbb{X}$ to represent the magnitude of the fixed gene value, we can explore its distribution.
-Assuming our gene value is uniformly distributed between 0 and 1, it is identified as $\beta(n, 1)$ \citep{gentle2009computational} distributed.
-Hence, by observing the values of these fixed genes, it's possible to infer $n$, the original population size.
-Supplemental Figure \ref{fig:beta-explain} illustrates this principle.
-This approach is further extendable to cases involving multiple independent genes, each adhering to the same fixed precision and initial uniform distribution, providing a compelling estimation technique for population size.
+Recall that the proposed gene drive mechanism (Section \ref{sec:genome-instrumentation}) fixes the maximum of population size $n$ fingerprint values, each drawn from a uniform distribution.
+Under this gene drive mechanism, fixed fingerprint magnitude reveals information about population size.
+As illustrated in Supplementary Figure \ref{fig:beta-explain}, larger populations tend to fix greater fingerprints..
+Scaling fingerprint values to between 0 and 1, fixed fingerprint magnitude turns out to follow beta distribution $\beta(n, 1)$ \citep{gentle2009computational}.
 
 Directly analogous techniques to estimate population size have also arisen in the context of decentralized, anonymous network engineering \citep{varagnolo2010distributed,hakan2012distributed}.
 In these schemes, nodes independently draw a random vector of numerical values from a known distribution.
@@ -22,31 +15,30 @@ Values are exchanged through an aggregating function like (e.g., minimum, maximu
 Each node can then independently infer probabilistic information about the larger network, in a manner that is generally consistent across nodes.
 
 \textbf{Population Size Estimator Statistics.}
-Statistical details necessary to work with the fixed-gene-magnitude inference method follow, some of which are, to best knowledge, not yet reported.
+Statistical details necessary to work with the unit-scaled fixed-fingerprint-magnitude inference method follow, some of which are, to best knowledge, not yet reported.
 Section \ref{sec:software-data} links to full derivations.
 
 \textit{Maximum Likelihood Estimator.}
-The maximum likelihood estimator for population size given $k$ independent observations of fixed-gene magnitude $x_i$ is
+The maximum likelihood estimator for population size given $k$ independent observations of unit-scaled fixed-fingerprint value $x_i$ is
 \begin{footnotesize}
 \begin{align} \label{eqn:popsize_mle}
 \hat{n}_\mathrm{mle} = -k/\textstyle\sum_{i=1}^k \log( x_i ).
 \end{align}
 \end{footnotesize}
 
-Mean square error of the maximum likelihood estimator for population size is $\mathrm{MSE}(\hat{n}_\mathrm{mle}) = (n^2 (k^{2}+ k-2) / [(k-1)^{2}(k-2)]$.
+With true population size $n$, mean square error of the maximum likelihood estimator for population size is $\mathrm{MSE}(\hat{n}_\mathrm{mle}) = (n^2 (k^{2}+ k-2) / [(k-1)^{2}(k-2)]$.
 Expected value for the maximum likelihood population size estimator $\hat{n}_\mathrm{mle}$ follows as $\mathrm{E}(\hat{n}_\mathrm{mle}) = nk/(k-1)$ for $k>1$.
-This value can be subtracted from the maximum likelihood estimator to yield a mean-unbiased population size estimator.
+This value can be subtracted from $\hat{n}_\mathrm{mle}$ to yield a mean-unbiased population size estimator.
 Maximum likelihood estimator results were also derived in \citep{varagnolo2010distributed}.
 
 \textit{Confidence Interval.}
-Computation of confidence intervals is necessary of facilitate experimental inference from population size estimators.
+Confidence intervals are useful to interpretation of population size estimates.
 Formulations derived from the maximum likelihood estimator are provided below.
 
-For a single observation of fixed gene magnitude $\hat{x}$, the population size $n$ can be estimated with $c\%$ confidence to fall between lower bound $\log[(50+0.5c)/100] / \log\hat{x}$ and upper bound $\log[(50-0.5c)/100] / \log\hat{x}$.
-
+For a single observation of unit-scaled fixed fingerprint magnitude $\hat{x}$, the population size $n$ can be estimated with $c\%$ confidence to fall between lower bound $\log[(50+0.5c)/100] / \log\hat{x}$ and upper bound $\log[(50-0.5c)/100] / \log\hat{x}$.
 At this low observational power, the 95\% confidence interval spans a 145-fold order of magnitude and a 99\% confidence interval spans a 1057-fold order of magnitude.
 
-For $k$ observations of fixed gene magnitude $\hat{x}_i$, the population size $n$ can be estimated with $c\%$ confidence to fall within the interval $(\hat{n}_\mathrm{lb}, \, \hat{n}_\mathrm{ub})$, computed by numerical solution of
+For $k$ observations of unit-scaled fixed gene magnitude $\hat{x}_i$, population size can be estimated with $c\%$ confidence to fall within the interval $(\hat{n}_\mathrm{lb}, \, \hat{n}_\mathrm{ub})$, computed by numerical solutions of
 
 \begin{footnotesize}
 \begin{align}
@@ -61,51 +53,41 @@ Here, $\Gamma$ is the complete gamma function.
 Four independent observations are sufficient to provide a 95\% confidence interval spanning 8-fold magnitude or a 99\% confidence interval spanning a 16-fold magnitude.
 Nine independent observations are sufficient for a 95\% confidence interval spanning a factor spanning 4-fold magnitude or a 99\% confidence interval spanning a factor of 6-fold magnitude.
 33 independent observations are sufficient for a 95\% confidence interval spanning 2-fold magnitude or a 99\% confidence interval spanning 2.5-fold magnitude.
-
-Note that the width of the confidence interval will scale as a constant factor of as $n \to \infty$.
+Because $\sum_{i=1}^k \log\hat{x}_i \propto \hat{n}_\mathrm{mle}^{-1}$, confidence bound width can be shown to scale as a constant factor of population size $n$.
 
 \textit{Median-unbiased Estimator.}
-A median-unbiased estimator for population can be trivially derived as the numerical solution to either confidence interval formula with $c = 50$.
+A median-unbiased estimator for population size can be trivially derived as the numerical solution to either confidence interval formula with $c = 50$.
 
 \textit{Credible Intervals.}
-Computation of credible intervals facilitates bayesian inference from estimators.
-Derivation assumes a uniform prior over population size.
-The credibility contained within a factor $f$ of the maximum likelihood estimate $\hat{n}_\mathrm{mle}$ can be calculated as $\gamma(k + 1, f k)/k! - \gamma(k + 1, k/f)/k!$.
+Computation of credible intervals facilitates Bayesian inference.
+Assuming a uniform prior over population size,
+the credibility contained within a factor $f$ of the maximum likelihood estimate $\hat{n}_\mathrm{mle}$ can be calculated as $\gamma(k + 1, f k)/k! - \gamma(k + 1, k/f)/k!$.
 Here, $\gamma$ is the lower incomplete gamma function.
-By its form, the credibility contained within a factor of maximum likelihood estimate remains constant across population sizes $n$.
-Credibility intervals require similar sample sizes to provide $n$-fold magnitude spans as those for confidence intervals discussed above.
+By form, this credibility remains constant across population sizes $n$.
+Credibility interval width scales similarly with sample size as discussed above for confidence intervals.
 
-\textit{Rolling Population Size Estimation.}
-Experiments reported here use a simple rolling process to aggregate ten preceding fixed-gene magnitudes to compute a population size estimate and confidence intervals.
-More sophisticated regularizations have been proposed to consolidate time series estimates of dynamically-changing network sizes \citep{hakan2012distributed}.
-
-\textbf{Population Size Inference Example.}
-Supplemental Figure \ref{fig:ne-process-example} shows an example of population size inference over the course of an experiment.
-
-Panel \ref{fig:ne-process-example:differentia} shows magnitudes of fixed differentia across the generational record extracted from a sample specimen at the end of the run.
-
-Population size estimates can be computed at each generation using the maximum likelihood estimator (Equation \ref{eqn:popsize_mle}), as shown in Panel \ref{fig:ne-process-example:singleton-est}.
-The true population size is annotated as a horizontal blue line.
-
-To generate more robust inference, inference was pooled over rolling sets of 10 fixed differentia.
-Population size estimates were again performed using Equation \ref{eqn:popsize_mle} with confidence interval bounds computed via Equation \ref{eqn:popsize_mle_ci}.
-Supplemental Figure \ref{fig:ne-process-example:running-est} plots this running estimation.
-Note that some discrepancy is expected between absolute population size (horizontal line) and effective population size $N_e$ (estimated) due to demographic factors.
+\textit{Rolling Estimation.}
+Experiments reported here compute a population size estimate and confidence intervals from a simple rolling aggregate of ten preceding fixed-gene magnitudes.
+However, more sophisticated regularizations have been proposed to consolidate time series estimates of dynamically-changing population sizes \citep{hakan2012distributed}.
+Supplemental Section \ref{sec:population-size-inference-example} walks through an example of rolling population size inference.
 
 \textbf{Validation Experiment.}
-The experiment tested the ability of the population size estimation process to detect effective population size differences between populations and effective population size changes within a population over time.
+This experiment set out to test ability of the population size estimation process to detect population size differences between populations and to detect population size changes within a population over time.
 Four different treatment conditions were compared: bottleneck, range expansion, selection pressure, and control.
 Ten independent replicates were performed for each treatment.
 
-The bottleneck treatment simulated a population reduction event.
+\textit{Bottleneck treatment.}
+Simulated a population crash and rebound.
 The population size was kept at 100 for 67 generations, reduced an order of magnitude to 10 for 66 generations, and then returned to 100 for another 67 generations.
 
-The range expansion treatment simulated gradual population size expansion.
+\textit{Range expansion.}
+Simulated gradual population size expansion.
 The population size was initiated at at 10 for 67 generations, then increased linearly for 66 generations to 142 at generation 133, and then maintained at 142 for another 67 generations.
 
-The selection-pressure treatment modified the selection intensity during the evolutionary process.
+\textit{Selection-pressure treatment.}
+Modified the selection intensity during the evolutionary process.
 This reduced the effective population size by increasing the number of population members eliminated without contributing to the next generation. gene pool.
-High selection pressure was applied for 67 generations (tournament size 8). Then, selection pressure was eliminated for 66 generations (tournament size of 1).
+High selection pressure was applied for 67 generations (tournament size 8). Then, selection pressure was eliminated for 66 generations (tournament size 1).
 Finally, high selection pressure (tournament size 8) was reinstated for the last 67 generations.
 
-The control treatment was run with a constant population size of 100 for 200 generations.
+\textit{Control treatment.} Run with a constant population size of 100 for 200 generations.

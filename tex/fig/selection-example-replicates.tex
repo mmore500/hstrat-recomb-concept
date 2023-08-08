@@ -37,13 +37,12 @@
   \hfill % Creates horizontal space. Can also use \hspace{<len>}
   \begin{minipage}{.25\textwidth} % adjust the width as needed
     \caption{
-    Gene prevalence trajectories (shown in red) and 16-generation rolling sums of gene prevalence annotation bit counts (shown in blue) across generations by selection strength treatment.
+    Trajectories of true gene prevalence (ired) and instrument set bit counts (blue).
     Top row summarizes distribution across replicates.
     Bottom row shows an example replicate of each treatment.
-    Fitness advantage 0.0 inferred no selective benefit, so all selection detections on this treatment are false positives.
-    Fitness advantage 0.1 experienced relatively weak selection and fitness advantage 1.0 experienced strong selection.
-    Spikes of high gene prevalence annotation bit count (blue) are indicative of selective dynamics.
-    Selection is detected for a replicate if any 16-generation rolling sum of gene prevalence annotation bit count (Section \ref{sec:dist-gene-prevalence-est}) exceeds the threshold.
+    Fitness advantage 0.0 conferred no selective benefit.
+    Fitness advantage 0.1 corresponded to relatively weak selection and fitness advantage 1.0 corresponded to strong selection.
+    Spikes of high gene prevalence annotation bit count (blue) are used to detect underlying selective dynamics (red).
     Note that $y$ axis scaling differs among bottom-row graphs.
     }
     \label{fig:selection-example-replicates}
